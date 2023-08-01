@@ -1,0 +1,168 @@
+{
+  "_id": "foo",
+  "mapcontainer": "mapContainer",
+  "startingViewpointName": "rennes",
+  "locale": "fr",
+  "startingMapName": "ol",
+  "maps": [
+    {
+      "type": "CesiumMap",
+      "name": "cesium",
+      "debugging": false,
+      "fxaa": false,
+      "enableLightning": true,
+      "allowSoftwareRendering": false,
+      "fogEnabled": true,
+      "fogEnabledMobile": true,
+      "fogDensity": 0.0002,
+      "fogDensityMobile": 0.0004,
+      "fogScreenSpaceError": 2,
+      "fogScreenSpaceErrorMobile": 4,
+      "globeColor": "#C0C0C0"
+    },
+    {
+      "type": "OpenlayersMap",
+      "name": "ol"
+    }
+  ],
+  "layers": [
+    {
+      "name": "terrain",
+      "type": "TerrainLayer",
+      "url": "https://rennes3d-dev-tiles.s3.fr-par.scw.cloud/b3ef17bf-fdde-4979-8f05-8b4db5811c43/",
+      "activeOnStartup": true,
+      "requestVertexNormals": true,
+      "zIndex": 1
+    },
+    {
+      "name": "iris",
+      "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=dem_stats:iris&outputFormat=application/json&srsName=EPSG:4326",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": true,
+      "zIndex": 4,
+      "style": {
+        "type": "VectorStyleItem",
+        "fill": {
+          "color": "rgba(0,0,0,0.2)"
+        },
+        "stroke": {
+          "color": "#FFFFFF",
+          "width": 1
+        }
+      }
+    },
+    {
+      "name": "customLayerDistrict",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": true,
+      "zIndex": 5
+    },
+    {
+      "name": "installations",
+      "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=nrj_prod:photovoltaique_installations_publiques&outputFormat=application/json&srsName=EPSG:4326",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": false,
+      "zIndex": 4,
+      "vectorProperties": {
+        "altitudeMode": "relativeToGround",
+        "heightAboveGround": 5,
+        "eyeOffset": [0, 0, -100]
+      }
+    },
+    {
+      "name": "customLayerInstallation",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": true,
+      "zIndex": 5
+    },
+    {
+      "type": "CesiumTilesetLayer",
+      "name": "roof3d",
+      "url": "https://rennes-coopterr-solaire-tiles.s3.fr-par.scw.cloud/fe157549-1c80-47f1-828a-f1a97bf92d80",
+      "activeOnStartup": true,
+      "allowPicking": true,
+      "screenSpaceError": 16,
+      "screenSpaceErrorMobile": 32,
+      "zIndex": 1
+    },
+    {
+      "name": "rennesOrtho",
+      "type": "WMTSLayer",
+      "url": "https://public.sig.rennesmetropole.fr/geowebcache/service/wmts",
+      "layer": "raster:ortho2021",
+      "format": "image/jpeg",
+      "tileMatrixSetID": "EPSG:3857",
+      "tileMatrixPrefix": "EPSG:3857:",
+      "extent": {
+        "coordinates": [
+          -2.1170142251181825, 47.78117827367612, -1.170835369910388,
+          48.39479586736775
+        ],
+        "epsg": "EPSG:4326"
+      },
+      "activeOnStartup": true,
+      "tileSize": [256, 256],
+      "maxLevel": 22,
+      "zIndex": 1
+    },
+    {
+      "name": "customLayerSearchAddress",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": true,
+      "zIndex": 100
+    },
+    {
+      "name": "roofSquaresArea",
+      "type": "GeoJSONLayer",
+      "projection": {
+        "epsg": "EPSG:4326"
+      },
+      "activeOnStartup": true,
+      "zIndex": 10,
+      "style": {
+        "type": "VectorStyleItem",
+        "fill": {
+          "color": "#fff"
+        },
+        "stroke": {
+          "color": "#FF00FF",
+          "width": 2
+        }
+      }
+    },
+    {
+      "name": "roofShape",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": true,
+      "zIndex": 1,
+      "projection": {
+        "epsg": "EPSG:4326"
+      }
+    },
+    {
+      "name": "solarPanel",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": false,
+      "zIndex": 1
+    }
+  ],
+  "viewpoints": [
+    {
+      "name": "rennes",
+      "groundPosition": [-1.7219, 48.09],
+      "distance": 29000,
+      "pitch": -45,
+      "roll": 0,
+      "heading": 0,
+      "animate": true,
+      "type": "Viewpoint",
+      "duration": 0.5,
+      "properties": {
+        "title": {
+          "en": "Rennes",
+          "fr": "Rennes"
+        }
+      }
+    }
+  ]
+}

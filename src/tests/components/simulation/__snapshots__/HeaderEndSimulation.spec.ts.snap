@@ -1,0 +1,20 @@
+// Vitest Snapshot v1
+
+exports[`HeaderEndSimulation.vue > renders the component correctly 1`] = `
+"<div class=\\"absolute top-0 left-0 flex flex-row items-center justify-between px-9 gap-12 w-[100%] h-[72px] bg-white shadow z-40\\">
+  <div class=\\"flex flex-row items-center\\"><button class=\\"shadow-md rounded-lg p-2 flex gap-2.5 shrink-0 grow-0\\">
+      <!--v-if--><span class=\\"m-auto font-semibold\\"><img src=\\"/src/assets/icons/chevron-left.svg\\"></span>
+      <!--v-if-->
+    </button>
+    <div class=\\"flex items-center p-0 gap-2.5 ml-5\\"><img src=\\"/src/assets/icons/solarPanelLogo.svg\\" alt=\\"\\" class=\\"h-10 w-10\\">
+      <h1 class=\\"font-dm-sans font-bold text-2xl text-center\\"> Cadastre Solaire </h1>
+    </div>
+  </div>
+  <div><button class=\\"ui-btn-secondary ui-btn-regular-size justify-center\\"><svg width=\\"20\\" height=\\"20\\" viewBox=\\"0 0 20 20\\" fill=\\"none\\" xmlns=\\"http://www.w3.org/2000/svg\\" role=\\"img\\" class=\\"m-auto mr-2\\">
+        <path d=\\"M19.2858 0.714294L0.714355 19.2857\\" stroke=\\"#262626\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"></path>
+        <path d=\\"M0.714355 0.714294L19.2858 19.2857\\" stroke=\\"#262626\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"></path>
+      </svg><span class=\\"m-auto font-semibold\\"><span class=\\"text-base font-medium\\">Retour à l'accueil</span></span>
+      <!---->
+    </button></div>
+</div>"
+`;
