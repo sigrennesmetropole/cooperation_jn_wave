@@ -1,20 +1,11 @@
-// import { useDistrictStore } from '@/stores/districtInformations'
 import { CesiumMap } from '@vcmap/core'
 import type { RennesApp } from './RennesApp'
 import { getCartesianPositionFromFeature } from '@/helpers/featureHelper'
 import type Feature from 'ol/Feature'
-// import { useInstallationsStore } from '@/stores/installations'
 
-export function updatePointCoordinates(
-  rennesApp: RennesApp
-  // storeName: string
-) {
+export function updatePointCoordinates(rennesApp: RennesApp) {
   let store: any
-  // if (storeName === 'district') {
-  //   store = useDistrictStore()
-  // } else if (storeName === 'installation') {
-  //   store = useInstallationsStore()
-  // }
+
   if (store.pointFeature !== null) {
     const newCoordinates = getCartesianPositionFromFeature(
       rennesApp,
@@ -26,16 +17,9 @@ export function updatePointCoordinates(
   }
 }
 
-export function addGenericListenerForUpdatePositions(
-  rennesApp: RennesApp
-  // storeName: string
-) {
+export function addGenericListenerForUpdatePositions(rennesApp: RennesApp) {
   let store: any
-  // if (storeName === 'district') {
-  //   store = useDistrictStore()
-  // } else if (storeName === 'installation') {
-  //   store = useInstallationsStore()
-  // }
+
   const map = rennesApp.maps.activeMap
   if (!(map instanceof CesiumMap)) {
     return
