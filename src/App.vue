@@ -8,7 +8,6 @@ import { useViewsStore } from '@/stores/views'
 import SearchBar from '@/components/search_bar/SearchBar.vue'
 import { viewList } from '@/model/views.model'
 import { usePanelsStore, PANEL_WIDTH } from '@/stores/panels'
-import UiExplanationsStepSunshine from '@/components/ui/UiExplanationsStepSunshine.vue'
 import UiSpinnerLoading from '@/components/ui/UiSpinnerLoading.vue'
 import { useMapStore } from '@/stores/map'
 
@@ -91,9 +90,6 @@ window.addEventListener('beforeunload', function (e) {
         "
         :isRedirectOnSearch="viewStore.currentView !== viewList.home"
       ></SearchBar>
-
-      <UiExplanationsStepSunshine />
-
       <div
         class="grow"
         :style="

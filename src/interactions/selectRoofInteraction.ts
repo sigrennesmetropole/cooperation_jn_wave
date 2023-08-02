@@ -9,18 +9,10 @@ import {
   vcsLayerName,
   VectorStyleItem,
 } from '@vcmap/core'
-// import { roofWfsService } from '@/services/roofWfsService'
 import type { RennesApp } from '@/services/RennesApp'
 import type { GeoJSONFeatureCollection } from 'ol/format/GeoJSON'
-import router from '@/router'
-import { useRoofsStore } from '@/stores/roof'
 import { useAddressStore } from '@/stores/address'
 import { apiAdresseDataGouvService } from '@/services/api-adresse-data-gouv'
-// import {
-//   isInteractionBuilding,
-//   isInteractionPanRoof,
-// } from '@/services/interactionUtils'
-// import { useMapStore } from '@/stores/map'
 import { RENNES_LAYER } from '@/stores/layers'
 
 const highlightStyle = new VectorStyleItem({
@@ -66,16 +58,6 @@ class SelectRoofInteraction extends AbstractInteraction {
     })
   }
 
-  _goToNextStep(
-    buildingRoofs: GeoJSONFeatureCollection,
-    selectedBuildingId: string
-  ) {
-    const roofStore = useRoofsStore()
-    roofStore.setSelectedBuildingId(selectedBuildingId)
-
-    router.push({ name: 'roof-selected-information' })
-  }
-
   async _setLatitudeAndLongitude(event: InteractionEvent) {
     const position = event.position
     if (position !== undefined) {
@@ -101,36 +83,6 @@ class SelectRoofInteraction extends AbstractInteraction {
         if (!selectedBuilding) {
           return event
         }
-
-        // if (isInteractionBuilding()) {
-        //   const mapStore = useMapStore()
-        //   mapStore.isLoadingMap = true
-        //   const buildingRoofs: GeoJSONFeatureCollection =
-        //     await roofWfsService.fetchRoofs(selectedBuildingId)
-        //   this._highglightRoofsOfTheBuilding(buildingRoofs)
-        //   await this._setLatitudeAndLongitude(event)
-        //   mapStore.isLoadingMap = false
-        //   this._goToNextStep(buildingRoofs, selectedBuildingId)
-        // } else if (isInteractionPanRoof()) {
-        //   const roofStore = useRoofsStore()
-        //   if (selectedBuildingId !== roofStore.selectedBuildingId) {
-        //     return event
-        //   }
-        //   const idRoof = selectedBuilding.getProperty('id')
-        //   if (!idRoof) {
-        //     return event
-        //   }
-        //   let isRoofFeature = false
-        //   roofStore.roofsFeatures?.features?.forEach((f) => {
-        //     if (f.properties?.surface_id == idRoof) {
-        //       isRoofFeature = true
-        //     }
-        //   })
-        //   if (!isRoofFeature) {
-        //     return event
-        //   }
-        //   roofStore.setSelectRoofSurfaceId(idRoof)
-        // }
       } else return event
     }
     return event
