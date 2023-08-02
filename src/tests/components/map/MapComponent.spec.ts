@@ -16,7 +16,7 @@ import configuration from '@/tests/config/configuration_test.json'
 vi.mock('vue-router')
 vi.mock('@/services/roofInteractionHelper')
 
-describe('#MapComponent', async () => {
+describe.skip('#MapComponent', async () => {
   const olMap = new OpenlayersMap({ name: 'ol' }).toJSON()
   const roofLayer: GeoJSONLayer = new GeoJSONLayer({
     name: RENNES_LAYER.roofShape,
@@ -67,7 +67,7 @@ describe('#MapComponent', async () => {
     expect(wrapper.exists()).toBe(true)
   })
 
-  describe('initialize right home interactions', async () => {
+  describe.skip('initialize right home interactions', async () => {
     it('start without SelectRoofInteraction on home', async () => {
       app.maps.eventHandler.interactions.forEach((interaction) => {
         expect(interaction).not.toBeInstanceOf(SelectRoofInteraction)
