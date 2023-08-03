@@ -5,14 +5,10 @@ import {
   Viewpoint,
   OpenlayersMap,
   GeoJSONLayer,
-  CesiumTilesetLayer,
 } from '@vcmap/core'
 import type Map from 'ol/Map.js'
 import { useMapStore } from '@/stores/map'
-import type { Layer } from 'ol/layer'
 import type { RennesLayer } from '@/stores/layers'
-import { RENNES_LAYER } from '@/stores/layers'
-import { Cartographic } from '@vcmap-cesium/engine'
 
 export class RennesApp extends VcsApp {
   readonly mapConfig
@@ -58,19 +54,6 @@ export class RennesApp extends VcsApp {
     return this.get3DMap().getViewpointSync()?.distance
   }
 
-  getRoofSquaresAreaLayer(): Layer {
-    return this.getOpenlayerMap()
-      .getAllLayers()
-      .find((l) => l.getProperties().name === 'roofSquaresArea')!
-  }
-
-  clearRoofsHighlight() {
-    const roofLayer: CesiumTilesetLayer = this.maps.layerCollection.getByKey(
-      RENNES_LAYER.roof3d
-    )
-    roofLayer.featureVisibility.clearHighlighting()
-  }
-
   async getLayerByKey(key: RennesLayer) {
     const layer: GeoJSONLayer = this.layers.getByKey(key) as GeoJSONLayer
     if (layer) {
@@ -78,17 +61,5 @@ export class RennesApp extends VcsApp {
     }
 
     return layer
-  }
-
-  async getHeight(x: number, y: number) {
-    const cartographic = Cartographic.fromDegrees(x, y)
-    const result = await this.get3DMap()
-      .getScene()
-      .sampleHeightMostDetailed([cartographic])
-    if (result.length === 0) {
-      return 0
-    }
-    const height = result[0].height
-    return height
   }
 }

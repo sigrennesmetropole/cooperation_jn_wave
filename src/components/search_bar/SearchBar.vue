@@ -166,10 +166,6 @@ const goToAddress = async (event: {
   search.value = stripHTMLTags(event.addr)
   addressStore.setAddress(search.value)
 
-  if (props.isRedirectOnSearch) {
-    router.push('/roof-selection')
-  }
-
   const newVp = await createVPForTypeAddress(rennesApp, event.type, event.item)
   if (newVp) {
     resetAutocompletion()
