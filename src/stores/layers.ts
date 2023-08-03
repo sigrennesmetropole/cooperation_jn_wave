@@ -6,14 +6,14 @@ export const RENNES_LAYER = {
   rennesOrtho: 'rennesOrtho',
   rennesBase: 'rennesBase',
   customLayerSearchAddress: 'customLayerSearchAddress',
-  roof3d: 'building',
+  building: 'building',
 }
 
 export const RENNES_LAYERNAMES = [
   RENNES_LAYER.rennesOrtho,
   RENNES_LAYER.rennesBase,
   RENNES_LAYER.customLayerSearchAddress,
-  RENNES_LAYER.roof3d,
+  RENNES_LAYER.building,
 ] as const
 
 export type RennesLayer = (typeof RENNES_LAYERNAMES)[number]
@@ -23,7 +23,8 @@ export const useLayersStore = defineStore('layers', () => {
   const visibilities: Ref<LayersVisibility> = ref({
     rennesOrtho: false,
     rennesBase: true,
-    roof3d: true,
+    building: true,
+    customLayerSearchAddress: true,
   })
 
   function enableLayer(name: RennesLayer) {
@@ -50,7 +51,7 @@ export const useLayersStore = defineStore('layers', () => {
     name: RennesLayer,
     visibility: boolean
   ) {
-    // update3DBaseLayer(is3D)
+    update3DBaseLayer(is3D)
     visibilities.value = {
       ...visibilities.value,
       [name]: visibility,

@@ -65,7 +65,7 @@ const heightClass = computed(() => {
 })
 
 function getMeasure() {
-  console.log("Measure")
+  console.log('Measure')
 }
 </script>
 
