@@ -21,7 +21,7 @@ onBeforeMount(async () => {
 })
 
 function isLeftPanelRetractable() {
-  const retractableList = viewList['roof-selection']
+  const retractableList = viewList['home']
   return retractableList.includes(viewStore.currentView!)
 }
 const isDisplaySearchBar = computed(() => {
@@ -71,7 +71,7 @@ window.addEventListener('beforeunload', function (e) {
     </template>
     <template v-else>
       <aside
-        class="z-8 absolute"
+        class="z-10 absolute"
         :class="panelAlignment"
         v-if="isDisplayAsideAndMap"
       >
@@ -82,7 +82,7 @@ window.addEventListener('beforeunload', function (e) {
 
       <SearchBar
         v-if="isDisplaySearchBar"
-        class="absolute z-9 top-6 left-6"
+        class="absolute z-10 top-6 left-6"
         :style="
           viewStore.currentView === viewList.home
             ? 'left: 480px;'

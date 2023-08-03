@@ -35,55 +35,32 @@
       "zIndex": 1
     },
     {
-      "name": "iris",
-      "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=dem_stats:iris&outputFormat=application/json&srsName=EPSG:4326",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": true,
-      "zIndex": 4,
-      "style": {
-        "type": "VectorStyleItem",
-        "fill": {
-          "color": "rgba(0,0,0,0.2)"
-        },
-        "stroke": {
-          "color": "#FFFFFF",
-          "width": 1
-        }
-      }
-    },
-    {
-      "name": "customLayerDistrict",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": true,
-      "zIndex": 5
-    },
-    {
-      "name": "installations",
-      "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=nrj_prod:photovoltaique_installations_publiques&outputFormat=application/json&srsName=EPSG:4326",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": false,
-      "zIndex": 4,
-      "vectorProperties": {
-        "altitudeMode": "relativeToGround",
-        "heightAboveGround": 5,
-        "eyeOffset": [0, 0, -100]
-      }
-    },
-    {
-      "name": "customLayerInstallation",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": true,
-      "zIndex": 5
-    },
-    {
       "type": "CesiumTilesetLayer",
-      "name": "roof3d",
-      "url": "https://rennes-coopterr-solaire-tiles.s3.fr-par.scw.cloud/fe157549-1c80-47f1-828a-f1a97bf92d80",
+      "name": "building",
+      "url": "https://rennes3d-dev-tiles.s3.fr-par.scw.cloud/f8a215a9-d0cc-4804-b284-0eac8a58924d/",
       "activeOnStartup": true,
       "allowPicking": true,
       "screenSpaceError": 16,
       "screenSpaceErrorMobile": 32,
       "zIndex": 1
+    },
+    {
+      "name": "rennesBase",
+      "type": "WMTSLayer",
+      "url": "https://public.sig.rennesmetropole.fr/geowebcache/service/wmts",
+      "layer": "ref_fonds:pvci_simple_gris",
+      "format": "image/png",
+      "tileMatrixSetID": "EPSG:3857",
+      "tileMatrixPrefix": "EPSG:3857:",
+      "extent": {
+        "coordinates": [
+          -2.1170142251181825, 47.78117827367612, -1.170835369910388,
+          48.39479586736775
+        ],
+        "epsg": "EPSG:4326",
+        "zIndex": 1
+      },
+      "activeOnStartup": true
     },
     {
       "name": "rennesOrtho",
@@ -100,7 +77,7 @@
         ],
         "epsg": "EPSG:4326"
       },
-      "activeOnStartup": true,
+      "activeOnStartup": false,
       "tileSize": [256, 256],
       "maxLevel": 22,
       "zIndex": 1
@@ -110,40 +87,6 @@
       "type": "GeoJSONLayer",
       "activeOnStartup": true,
       "zIndex": 100
-    },
-    {
-      "name": "roofSquaresArea",
-      "type": "GeoJSONLayer",
-      "projection": {
-        "epsg": "EPSG:4326"
-      },
-      "activeOnStartup": true,
-      "zIndex": 10,
-      "style": {
-        "type": "VectorStyleItem",
-        "fill": {
-          "color": "#fff"
-        },
-        "stroke": {
-          "color": "#FF00FF",
-          "width": 2
-        }
-      }
-    },
-    {
-      "name": "roofShape",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": true,
-      "zIndex": 1,
-      "projection": {
-        "epsg": "EPSG:4326"
-      }
-    },
-    {
-      "name": "solarPanel",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": false,
-      "zIndex": 1
     }
   ],
   "viewpoints": [

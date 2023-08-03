@@ -2,12 +2,9 @@ import type { Ref } from 'vue'
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-import SelectRoofInteraction from '@/interactions/selectRoofInteraction'
 import ForbidenClickInteraction from '@/interactions/forbidClickInteraction'
 
-type InteractionsTypes =
-  | typeof SelectRoofInteraction
-  | typeof ForbidenClickInteraction
+type InteractionsTypes = typeof ForbidenClickInteraction
 
 export const useInteractionsStore = defineStore('interactions', () => {
   const _activeInteractions: Ref<InteractionsTypes[]> = ref([])
@@ -38,7 +35,7 @@ export const useInteractionsStore = defineStore('interactions', () => {
   }
 
   function getInactiveInteractions() {
-    return [SelectRoofInteraction, ForbidenClickInteraction].filter(
+    return [ForbidenClickInteraction].filter(
       (item) => _activeInteractions.value.indexOf(item) < 0
     )
   }

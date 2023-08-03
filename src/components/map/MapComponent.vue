@@ -3,22 +3,17 @@ import { onMounted, inject } from 'vue'
 import type { RennesApp } from '@/services/RennesApp'
 import UiMap from '@/components/ui/UiMap.vue'
 import { RENNES_LAYERNAMES, useLayersStore } from '@/stores/layers'
-import {
-  updateInteractionsOnMap,
-  updateInteractionsStoreAfterViewChange,
-} from '@/services/interactionUtils'
+import { updateInteractionsStoreAfterViewChange } from '@/services/interactionUtils'
 import type { Layer } from '@vcmap/core'
 import NavigationButtons from '@/components/map/buttons/NavigationButtons.vue'
+
 import { useMapStore } from '@/stores/map'
 import { useViewsStore } from '@/stores/views'
-import { useInteractionsStore } from '@/stores/interactions'
-import { applyInstallationStyle } from '@/services/installationService'
 
 const rennesApp = inject('rennesApp') as RennesApp
 const layerStore = useLayersStore()
 const mapStore = useMapStore()
 const viewStore = useViewsStore()
-const interactionsStore = useInteractionsStore()
 
 onMounted(async () => {
   await rennesApp.initializeMap()
@@ -26,11 +21,10 @@ onMounted(async () => {
   await updateLayersVisibility()
   // force initialization of the interaction on init page
   updateInteractionsStoreAfterViewChange()
-  updateInteractionsOnMap(rennesApp)
 })
 
 async function updateActiveMap() {
-  await mapStore.activate3d()
+  await mapStore.activate2d()
 }
 
 async function updateLayersVisibility() {
@@ -67,13 +61,8 @@ mapStore.$subscribe(async () => {
     }
   }
   if (viewStore.currentView === 'home') {
-    await applyInstallationStyle(rennesApp)
+    // await applyInstallationStyle(rennesApp)
   }
-})
-
-interactionsStore.$subscribe(async () => {
-  // update map interactions on the mapobject
-  updateInteractionsOnMap(rennesApp)
 })
 </script>
 
