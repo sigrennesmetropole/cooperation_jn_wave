@@ -84,9 +84,7 @@ window.addEventListener('beforeunload', function (e) {
         v-if="isDisplaySearchBar"
         class="absolute z-10 top-6 left-6"
         :style="
-          viewStore.currentView === viewList.home
-            ? 'left: 480px;'
-            : 'left: 24px;'
+          panelStore.isInformationPanelShown ? 'left: 480px;' : 'left: 24px;'
         "
         :isRedirectOnSearch="viewStore.currentView !== viewList.home"
       ></SearchBar>
