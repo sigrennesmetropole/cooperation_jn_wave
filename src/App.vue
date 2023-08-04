@@ -10,6 +10,7 @@ import { viewList } from '@/model/views.model'
 import { usePanelsStore, PANEL_WIDTH } from '@/stores/panels'
 import UiSpinnerLoading from '@/components/ui/UiSpinnerLoading.vue'
 import { useMapStore } from '@/stores/map'
+import { apiExemService } from '@/services/api-exem'
 
 const viewStore = useViewsStore()
 const panelStore = usePanelsStore()
@@ -18,6 +19,11 @@ const mapStore = useMapStore()
 onBeforeMount(async () => {
   const rennesApp = new RennesApp(mapConfig)
   provide('rennesApp', rennesApp)
+  const siteMeasurement = await apiExemService.getSiteMeasurement(
+    'fe88e9f2-3f8d-4fc1-a37c-4ff24cdb7e64'
+  )
+  const sitesMeasurement = await apiExemService.getSitesMeasurement()
+  console.log(siteMeasurement, sitesMeasurement)
 })
 
 function isLeftPanelRetractable() {
