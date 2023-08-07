@@ -11,6 +11,7 @@ import { UiDescribeButtonCompass } from '@sigrennesmetropole/cooperation_jn_comm
 
 import CompassComponent from '@/components/map/CompassComponent.vue'
 import IconMeasure from '@/assets/icons/measure-tool.png'
+import UiDescribe3DMode from '@/components/map/UiDescribe3DMode.vue'
 
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
@@ -75,6 +76,18 @@ function getMeasure() {
     class="transition-[height] absolute right-2 bottom-10 flex flex-col [&>*]:m-2 text-gray-dark items-center w-32 select-none"
     :style="panelStore.isRightPanel() ? `margin-right: ${PANEL_WIDTH};` : ''"
   >
+    <UiIconButton
+      class="rounded-lg"
+      @click="getMeasure"
+      ariaLabelButton="Outil de mesure"
+      titleButton="Outil de mesure"
+      heightTitle="30"
+      widthTitle="200"
+      positionX="-210"
+      positionY="12"
+    >
+      <img :src="IconMeasure" />
+    </UiIconButton>
     <div class="flex flex-col zoom-buttons text-2xl [&>*]:p-2" role="group">
       <UiIconButton
         class="rounded-t-lg"
@@ -110,18 +123,7 @@ function getMeasure() {
         <IconSynchronize />
       </UiIconButton>
     </div>
-    <UiIconButton
-      class="rounded-lg"
-      @click="getMeasure"
-      ariaLabelButton="Outil de mesure"
-      titleButton="Outil de mesure"
-      heightTitle="30"
-      widthTitle="200"
-      positionX="-210"
-      positionY="12"
-    >
-      <img :src="IconMeasure" />
-    </UiIconButton>
+
     <UiIconButton
       class="rounded-lg"
       @click="toggle3DMap"
@@ -145,6 +147,7 @@ function getMeasure() {
     class="absolute right-[130px] bottom-12"
     v-if="!panelStore.isRightPanel()"
   >
-    <UiDescribeButtonCompass></UiDescribeButtonCompass>
+    <UiDescribeButtonCompass v-if="mapStore.is3D()"></UiDescribeButtonCompass>
+    <UiDescribe3DMode v-else></UiDescribe3DMode>
   </div>
 </template>
