@@ -9,7 +9,6 @@ import {
 import type Map from 'ol/Map.js'
 import { useMapStore } from '@/stores/map'
 import type { RennesLayer } from '@/stores/layers'
-import displayAllContinuousMeasurement from '@/interactions/clickAndMoveInteraction'
 
 export class RennesApp extends VcsApp {
   readonly mapConfig
@@ -33,7 +32,6 @@ export class RennesApp extends VcsApp {
       mapStore.isInitializeMap = true
       mapStore.viewPoint = homeViewPoint
     }
-    await displayAllContinuousMeasurement
   }
 
   getHomeViewpoint() {
