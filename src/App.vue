@@ -23,14 +23,14 @@ onBeforeMount(async () => {
 })
 
 function isLeftPanelRetractable() {
-  const retractableList = viewList['home']
+  const retractableList = [viewList['home'], viewList['measurements']]
   return retractableList.includes(viewStore.currentView!)
 }
 const isDisplaySearchBar = computed(() => {
   return [viewList.home].includes(viewStore.currentView!)
 })
 const isDisplayAsideAndMap = computed(() => {
-  return [viewList['home']].includes(viewStore.currentView!)
+  return [viewList['home'], viewList['measurements']].includes(viewStore.currentView!)
 })
 
 const panelAlignment = computed(() => {
@@ -51,6 +51,7 @@ const isAlertBoxBrowserNotDisplay = computed(() => {
   const isViewNotDisplayAlertBox = [
     viewList['home'],
     viewList['legal-notice'],
+    viewList['measurements'],
     null,
   ].includes(viewStore.currentView!)
   return isViewNotDisplayAlertBox

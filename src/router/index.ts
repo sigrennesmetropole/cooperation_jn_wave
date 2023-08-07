@@ -40,6 +40,14 @@ const routes = [
     },
   },
   {
+    path: '/measurements',
+    name: 'measurements',
+    component: () => import('../views/Measurements.vue'),
+    meta: {
+      title: 'Page Measurements',
+    },
+  },
+  {
     path: '/legalnotice/:legallink',
     name: 'legal-notice',
     component: () => import('../views/LegalNoticeView.vue'),
