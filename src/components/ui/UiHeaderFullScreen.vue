@@ -20,7 +20,7 @@ function restartHome() {
       <slot name="title-img"></slot>
     </div>
     <slot name="mid-content"></slot>
-    <div v-if="viewStore.currentView != 'end-simulation'">
+    <div>
       <UiButton
         class="ui-btn-secondary ui-btn-regular-size justify-center"
         :icon="IconCrossClose"

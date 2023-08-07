@@ -1,6 +1,4 @@
-# Cooperation Jumeau Numérique Solar
-
-Code de l'application de coopération sur le cadastre solairede Rennes Métropole basée sur un jumeau numérique.
+# Cooperation Jumeau Numérique Wave
 
 ## Quick start
 
@@ -67,20 +65,20 @@ npm run story
 
 ### Demo
 
-- [histoires](https://sigrennesmetropole.github.io/cooperation_jn_solar/main/)
+- [histoires](https://sigrennesmetropole.github.io/cooperation_jn_wave/main/)
 
 ## Docker
 
 ### Build locally the image
 
 ```shell
-docker build -t cooperation_jn_solar:latest --build-arg NPM_TOKEN=<YOUR_GITHUB_NPM_TOKEN>.
+docker build -t cooperation_jn_wave:latest --build-arg NPM_TOKEN=<YOUR_GITHUB_NPM_TOKEN>.
 ```
 
 ### Run the image
 
 ```shell
-docker run -p 8080:80 cooperation_jn_solar:latest
+docker run -p 8080:80 cooperation_jn_wave:latest
 ```
 
 ## Deployment of the app
@@ -88,7 +86,7 @@ docker run -p 8080:80 cooperation_jn_solar:latest
 ### 1) Image creation
 
 Through Github pipeline, an image is created on every push on 'main' branch, and on each pull request.
-The repository for this image can be found here: https://github.com/sigrennesmetropole/cooperation_jn_solar/pkgs/container/cooperation_jn_solar/versions
+The repository for this image can be found here: https://github.com/sigrennesmetropole/cooperation_jn_wave/pkgs/container/cooperation_jn_wave/versions
 
 #### On _pull request_
 

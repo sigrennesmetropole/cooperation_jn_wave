@@ -30,7 +30,9 @@ const isDisplaySearchBar = computed(() => {
   return [viewList.home].includes(viewStore.currentView!)
 })
 const isDisplayAsideAndMap = computed(() => {
-  return [viewList['home'], viewList['measurements']].includes(viewStore.currentView!)
+  return [viewList['home'], viewList['measurements']].includes(
+    viewStore.currentView!
+  )
 })
 
 const panelAlignment = computed(() => {
