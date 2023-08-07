@@ -1,6 +1,6 @@
 {
-  "name": "cooperation_jn_solar",
-  "version": "1.0.3",
+  "name": "cooperation_jn_wave",
+  "version": "0.0.1",
   "engines": {
     "node": ">=14"
   },
