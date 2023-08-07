@@ -87,6 +87,12 @@
       "type": "GeoJSONLayer",
       "activeOnStartup": true,
       "zIndex": 100
+    },
+    {
+      "name": "customLayerContinuousMeasurement",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": true,
+      "zIndex": 100
     }
   ],
   "viewpoints": [
