@@ -13,9 +13,7 @@ const redirectToRoofSelection = (
   if (
     (from.name === undefined || from.name === null) &&
     to.name !== 'home' &&
-    to.name !== 'roof-selection' &&
-    to.name !== 'legal-notice' &&
-    to.name !== 'redirect-enedis'
+    to.name !== 'legal-notice'
   ) {
     next({ name: 'roof-selection' })
   } else {
@@ -37,6 +35,14 @@ const routes = [
     component: () => import('../views/HomeView.vue'),
     meta: {
       title: 'Page Home',
+    },
+  },
+  {
+    path: '/measurements',
+    name: 'measurements',
+    component: () => import('../views/MeasurementsView.vue'),
+    meta: {
+      title: 'Page Measurements',
     },
   },
   {
