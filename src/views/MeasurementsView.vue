@@ -4,23 +4,18 @@ import PointInformationComponent from '@/components/ui/PointInformationComponent
 import PointSourceComponent from '@/components/ui/PointSourceComponent.vue'
 import { usePointsStore } from '@/stores/points'
 import { onMounted } from 'vue'
-import { usePanelsStore } from '@/stores/panels'
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
 
-const panelsStore = usePanelsStore()
 const viewStore = useViewsStore()
 const pointStore = usePointsStore()
 
 onMounted(() => {
   viewStore.setCurrentView(viewList['measurements'])
-  panelsStore.setTypePanelDisplay('left')
-  panelsStore.isCompletelyHidden = false
-
   // Temporary, before adding map interactions and setting the store dynamically. Keep these lignes for design testing :
-  // pointStore.setPointType('real-time')
+  pointStore.setPointType('real-time')
   // pointStore.setPointType('spot-measurement')
-  pointStore.setPointType('site-emitting')
+  // pointStore.setPointType('site-emitting')
 })
 </script>
 

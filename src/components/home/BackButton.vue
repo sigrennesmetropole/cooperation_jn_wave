@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import ChevronArrowLeft from '@/assets/icons/chevron-left.svg'
-import UiButton from '@/components/ui/UiButton.vue'
+import { UiButton } from '@sigrennesmetropole/cooperation_jn_common_ui'
 import { usePanelsStore } from '@/stores/panels'
 
 const router = useRouter()
