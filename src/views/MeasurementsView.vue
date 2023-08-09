@@ -3,6 +3,9 @@ import UiWavesPointsPanelTitle from '@/components/ui/UiWavesPointsPanelTitle.vue
 import PointInformationComponent from '@/components/ui/PointInformationComponent.vue'
 import PointSourceComponent from '@/components/ui/PointSourceComponent.vue'
 import DetailComponent from '@/components/ui/DetailComponent.vue'
+import WaveObservatoryComponent from '@/components/ui/WaveObservatoryComponent.vue'
+import CartoRadioComponent from '@/components/ui/CartoRadioComponent.vue'
+
 import { usePointsStore } from '@/stores/points'
 import { onMounted } from 'vue'
 import { useViewsStore } from '@/stores/views'
@@ -74,4 +77,8 @@ onMounted(() => {
       </p>
     </template>
   </PointSourceComponent>
+  <WaveObservatoryComponent
+    v-if="pointStore.pointType == 'real-time'"
+  ></WaveObservatoryComponent>
+  <CartoRadioComponent v-else></CartoRadioComponent>
 </template>
