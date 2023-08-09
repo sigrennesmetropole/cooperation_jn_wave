@@ -25,7 +25,7 @@ function goToAnfr() {
       radioélectriques en France.
     </p>
     <UiButton
-      class="border border-black rounded-lg gap-3 px-4 py-3 justify-center flex flex-row mt-[8px] cursor-pointer w-fit"
+      class="border border-black rounded-lg gap-3 px-4 py-3 justify-center flex flex-row mt-2 cursor-pointer w-fit"
       @click="goToAnfr()"
     >
       <div

@@ -12,7 +12,7 @@ function goToWaveObservatory() {
 </script>
 
 <template>
-  <div class="flex flex-col p-6 gap-[8px] border rounded-lg border-slate-400">
+  <div class="flex flex-col p-6 gap-2 border rounded-lg border-slate-400">
     <div>
       <img :src="WaveObservatory" class="px-3 pb-[7px]" />
     </div>
@@ -21,7 +21,7 @@ function goToWaveObservatory() {
       capteurs permanents du laboratoire Exem installés par la ville de Rennes.
     </p>
     <UiButton
-      class="border border-black rounded-lg gap-3 px-4 py-3 justify-center flex flex-row mt-[8px] cursor-pointer"
+      class="border border-black rounded-lg gap-3 px-4 py-3 justify-center flex flex-row mt-2 cursor-pointer"
       @click="goToWaveObservatory()"
     >
       <div
