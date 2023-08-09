@@ -20,7 +20,7 @@ onMounted(async () => {
   await updateActiveMap()
   await updateLayersVisibility()
   // force initialization of the interaction on init page
-  updateInteractionsStoreAfterViewChange()
+  updateInteractionsStoreAfterViewChange(rennesApp)
 })
 
 async function updateActiveMap() {
@@ -48,7 +48,7 @@ layerStore.$subscribe(async () => {
 
 viewStore.$subscribe(async () => {
   // triger mandatory store change after changing view
-  updateInteractionsStoreAfterViewChange()
+  updateInteractionsStoreAfterViewChange(rennesApp)
 })
 
 mapStore.$subscribe(async () => {

@@ -7,14 +7,17 @@ import { onMounted } from 'vue'
 import { usePanelsStore } from '@/stores/panels'
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
+import { usePointsStore } from '@/stores/points'
 
 const panelsStore = usePanelsStore()
 const viewStore = useViewsStore()
+const pointStore = usePointsStore()
 
 onMounted(() => {
   viewStore.setCurrentView(viewList['home'])
   panelsStore.setTypePanelDisplay('left')
   panelsStore.isCompletelyHidden = false
+  pointStore.resetPoint()
 })
 </script>
 
