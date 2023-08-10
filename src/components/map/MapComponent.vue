@@ -6,6 +6,7 @@ import { RENNES_LAYERNAMES, useLayersStore } from '@/stores/layers'
 import { updateInteractionsStoreAfterViewChange } from '@/services/interactionUtils'
 import type { Layer } from '@vcmap/core'
 import NavigationButtons from '@/components/map/buttons/NavigationButtons.vue'
+import StudySiteTooltip from '@/components/map/StudySiteTooltip.vue'
 
 import { useMapStore } from '@/stores/map'
 import { useViewsStore } from '@/stores/views'
@@ -69,4 +70,5 @@ mapStore.$subscribe(async () => {
 <template>
   <UiMap></UiMap>
   <NavigationButtons />
+  <StudySiteTooltip />
 </template>
