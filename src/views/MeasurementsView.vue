@@ -2,6 +2,7 @@
 import UiWavesPointsPanelTitle from '@/components/ui/UiWavesPointsPanelTitle.vue'
 import PointInformationComponent from '@/components/ui/PointInformationComponent.vue'
 import PointSourceComponent from '@/components/ui/PointSourceComponent.vue'
+import DetailComponent from '@/components/ui/DetailComponent.vue'
 import WaveObservatoryComponent from '@/components/ui/WaveObservatoryComponent.vue'
 import CartoRadioComponent from '@/components/ui/CartoRadioComponent.vue'
 
@@ -15,17 +16,13 @@ const pointStore = usePointsStore()
 
 onMounted(() => {
   viewStore.setCurrentView(viewList['measurements'])
-  // Temporary, before adding map interactions and setting the store dynamically. Keep these lignes for design testing :
-  pointStore.setPointType('real-time')
-  // pointStore.setPointType('spot-measurement')
-  // pointStore.setPointType('site-emitting')
 })
 </script>
 
 <template>
   <UiWavesPointsPanelTitle></UiWavesPointsPanelTitle>
   <div class="border-b border-neutral-300"></div>
-
+  <DetailComponent></DetailComponent>
   <PointInformationComponent>
     <template
       v-if="

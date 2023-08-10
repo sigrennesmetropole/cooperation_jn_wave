@@ -1,16 +1,54 @@
-import { viewList } from '@/model/views.model'
-import { useViewsStore } from '@/stores/views'
-import ForbidenClickInteraction from '@/interactions/forbidClickInteraction'
-import { useInteractionsStore } from '@/stores/interactions'
+import mapClickAndMoveInteraction from '@/interactions/clickAndMoveInteraction'
+import type { AbstractInteraction } from '@vcmap/core'
+import type { RennesApp } from './RennesApp'
 
-export function updateInteractionsStoreAfterViewChange() {
-  const interactionsStore = useInteractionsStore()
-  const viewStore = useViewsStore()
-  if (viewStore.currentView === viewList.home) {
-    interactionsStore.enableInteraction(ForbidenClickInteraction)
-  } else {
-    interactionsStore.disableInteraction(ForbidenClickInteraction)
+type InteractionsTypes = typeof mapClickAndMoveInteraction
+
+function newTypeInteraction(
+  rennesApp: RennesApp,
+  typeInteraction: InteractionsTypes
+): AbstractInteraction | undefined {
+  if (typeInteraction === mapClickAndMoveInteraction) {
+    return new mapClickAndMoveInteraction(rennesApp)
   }
+  return undefined
+}
+
+export function updateInteractionsStoreAfterViewChange(rennesApp: RennesApp) {
+  if (!isInteractionExist(rennesApp, mapClickAndMoveInteraction)) {
+    const interaction = newTypeInteraction(
+      rennesApp,
+      mapClickAndMoveInteraction
+    )
+    if (interaction) {
+      rennesApp.maps.eventHandler.addPersistentInteraction(interaction)
+    }
+  }
+  activeInteraction(rennesApp, mapClickAndMoveInteraction)
+}
+
+function activeInteraction(
+  rennesApp: RennesApp,
+  typeInteraction: InteractionsTypes
+) {
+  rennesApp.maps.eventHandler.interactions.forEach((interaction) => {
+    if (interaction instanceof typeInteraction) {
+      interaction.setActive(true)
+    }
+  })
+}
+
+function isInteractionExist(
+  rennesApp: RennesApp,
+  typeInteraction: InteractionsTypes
+) {
+  let res = false
+  rennesApp.maps.eventHandler.interactions.forEach((interaction) => {
+    if (interaction instanceof typeInteraction) {
+      res = true
+    }
+  })
+  return res
 }
 
 /**
