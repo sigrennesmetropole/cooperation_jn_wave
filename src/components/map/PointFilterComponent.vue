@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { usePanelsStore, PANEL_WIDTH } from '@/stores/panels'
 import RealTimeLogo from '@/assets/icons/real-time-logo.svg'
 import SpotMeasurementLogo from '@/assets/icons/spot-measurement-logo.svg'
 import SitesMeasurementLogo from '@/assets/icons/sites-logo.svg'
 import NewProjectsLogo from '@/assets/icons/sitesNext.svg'
 import { ref } from 'vue'
 
-const panelStore = usePanelsStore()
 const selectedPointRealTime = ref<boolean>(false)
 const selectedPointSpotData = ref<boolean>(false)
 const selectedPointEmitterSites = ref<boolean>(false)
@@ -20,8 +18,7 @@ function addPointsOnMap(nameOfPoints: string) {
 
 <template>
   <div
-    class="transition-[height] absolute right-10 top-10 flex flex-col items-start select-none bg-white h-[193px] w-[273px] p-4 gap-4 rounded-lg shadow-md"
-    :style="panelStore.isRightPanel() ? `margin-right: ${PANEL_WIDTH};` : ''"
+    class="absolute right-10 top-10 flex flex-col items-start select-none bg-white h-[193px] w-[273px] p-4 gap-4 rounded-lg shadow-md"
   >
     <div class="flex flex-row gap-3 items-center">
       <input
