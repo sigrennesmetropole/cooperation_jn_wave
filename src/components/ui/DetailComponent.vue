@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { usePointsStore } from '@/stores/points'
 import { UiButtonWithTooltip } from '@sigrennesmetropole/cooperation_jn_common_ui'
+import StandardIcon from '@/assets/icons/standard.svg'
+import UnderSurveillanceIcon from '@/assets/icons/under-surveillance.svg'
+import NonConformingIcon from '@/assets/icons/improper.svg'
 import { computed } from 'vue'
 
 const pointStore = usePointsStore()
 
 const ConformityLabel = computed(() => {
   if (pointStore.conformity == 'conform') {
-    return '/src/assets/icons/standard.svg'
+    return StandardIcon
   } else if (pointStore.conformity == 'under surveillance') {
-    return '/src/assets/icons/under-surveillance.svg'
+    return UnderSurveillanceIcon
   } else if (pointStore.conformity == 'non-conforming') {
-    return '/src/assets/icons/improper.svg'
+    return NonConformingIcon
   } else {
     return null
   }
