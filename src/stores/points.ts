@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const usePointsStore = defineStore('address', () => {
+export const usePointsStore = defineStore('point', () => {
   const pointType: Ref<string> = ref('')
   const address: Ref<string> = ref('')
   const status: Ref<string> = ref('')
