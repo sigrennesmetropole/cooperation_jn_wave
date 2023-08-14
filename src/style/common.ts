@@ -10,3 +10,11 @@ export const ContinuousMeasurementStyle: Style = new Style({
     scale: 1,
   }),
 })
+
+export const HoverContinuousMeasurementStyle: Style = new Style({
+  image: new Icon({
+    opacity: 1,
+    src: continuousIcon,
+    scale: 1.3,
+  }),
+})

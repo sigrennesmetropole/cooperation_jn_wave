@@ -1,5 +1,6 @@
 import mapClickAndMoveInteraction from '@/interactions/clickAndMoveInteraction'
 import type { AbstractInteraction } from '@vcmap/core'
+import { EventType } from '@vcmap/core'
 import type { RennesApp } from './RennesApp'
 
 type InteractionsTypes = typeof mapClickAndMoveInteraction
@@ -36,6 +37,7 @@ function activeInteraction(
       interaction.setActive(true)
     }
   })
+  rennesApp.maps.eventHandler.featureInteraction.setActive(EventType.CLICKMOVE)
 }
 
 function isInteractionExist(
