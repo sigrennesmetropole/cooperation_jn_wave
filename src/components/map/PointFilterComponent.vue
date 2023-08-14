@@ -4,15 +4,25 @@ import SpotMeasurementLogo from '@/assets/icons/spot-measurement-logo.svg'
 import SitesMeasurementLogo from '@/assets/icons/sites-logo.svg'
 import NewProjectsLogo from '@/assets/icons/sitesNext.svg'
 import { ref } from 'vue'
+import { useCheckboxStore } from '@/stores/checkbox'
 
-const selectedPointRealTime = ref<boolean>(false)
-const selectedPointSpotData = ref<boolean>(false)
-const selectedPointEmitterSites = ref<boolean>(false)
-const selectedPointNewProjects = ref<boolean>(false)
+const checkboxStore = useCheckboxStore()
+
+const selectedPointRealTime = ref<boolean>(true)
+const selectedPointSpotData = ref<boolean>(true)
+const selectedPointEmitterSites = ref<boolean>(true)
+const selectedPointNewProjects = ref<boolean>(true)
 
 function addPointsOnMap(nameOfPoints: string) {
-  // set active the layer
-  console.log(nameOfPoints)
+  if (nameOfPoints == 'real-time') {
+    checkboxStore.toggleRealTimePoint()
+  } else if (nameOfPoints == 'spot-data') {
+    checkboxStore.toggleSpotDataPoint()
+  } else if (nameOfPoints == 'emitting-sites') {
+    checkboxStore.toggleEmitterSitesPoint()
+  } else if (nameOfPoints == 'new-projects') {
+    checkboxStore.toggleNewProjectPoint()
+  }
 }
 </script>
 
