@@ -8,6 +8,7 @@ export const RENNES_LAYER = {
   customLayerSearchAddress: 'customLayerSearchAddress',
   building: 'building',
   customLayerContinuousMeasurement: 'customLayerContinuousMeasurement',
+  customLayerSpotData: 'customLayerSpotData',
 }
 
 export const RENNES_LAYERNAMES = [
@@ -16,6 +17,7 @@ export const RENNES_LAYERNAMES = [
   RENNES_LAYER.customLayerSearchAddress,
   RENNES_LAYER.building,
   RENNES_LAYER.customLayerContinuousMeasurement,
+  RENNES_LAYER.customLayerSpotData,
 ] as const
 
 export type RennesLayer = (typeof RENNES_LAYERNAMES)[number]
@@ -28,6 +30,7 @@ export const useLayersStore = defineStore('layers', () => {
     building: true,
     customLayerSearchAddress: true,
     customLayerContinuousMeasurement: true,
+    customLayerSpotData: true,
   })
 
   function enableLayer(name: RennesLayer) {

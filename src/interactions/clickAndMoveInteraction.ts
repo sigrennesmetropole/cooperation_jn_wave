@@ -11,8 +11,10 @@ import type { RennesApp } from '@/services/RennesApp'
 import { usePointsStore } from '@/stores/points'
 import { RENNES_LAYER } from '@/stores/layers'
 import { useViewsStore } from '@/stores/views'
-import { HoverContinuousMeasurementStyle } from '../../src/style/common'
-import { ContinuousMeasurementStyle } from '../../src/style/common'
+import {
+  getUnselectedPointStyle,
+  getSelectedPointStyle,
+} from '../../src/style/common'
 import router from '@/router'
 import type { Feature } from 'ol'
 import type { Geometry } from 'ol/geom'
@@ -20,6 +22,8 @@ import type { Geometry } from 'ol/geom'
 class mapClickAndMoveInteraction extends AbstractInteraction {
   private _rennesApp: RennesApp
   pointsLayer: GeoJSONLayer
+  spotPointsLayer: GeoJSONLayer
+  layers: GeoJSONLayer[]
 
   constructor(rennesApp: RennesApp) {
     super(EventType.CLICKMOVE, ModificationKeyType.NONE, PointerKeyType.ALL)
@@ -27,37 +31,16 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     this.pointsLayer = this._rennesApp.layers.getByKey(
       RENNES_LAYER.customLayerContinuousMeasurement
     ) as GeoJSONLayer
+    this.spotPointsLayer = this._rennesApp.layers.getByKey(
+      RENNES_LAYER.customLayerSpotData
+    ) as GeoJSONLayer
+    this.layers = [this.pointsLayer, this.spotPointsLayer]
   }
 
-  async pipe(event: InteractionEvent): Promise<InteractionEvent> {
+  setPointInformationsInStore(selectedPoint: Feature) {
     const pointsStore = usePointsStore()
-    const viewStore = useViewsStore()
-    const selectedPoint = event.feature as Feature<Geometry>
 
-    if (event.type & EventType.MOVE) {
-      if (
-        selectedPoint === undefined ||
-        selectedPoint[vcsLayerName] !== this.pointsLayer.name
-      ) {
-        document.body.style.cursor = 'default'
-        return event
-      }
-      document.body.style.cursor = 'pointer'
-      return event
-    } else if (event.type & EventType.CLICK) {
-      this.pointsLayer.getFeatures().forEach((f) => {
-        f.setStyle(ContinuousMeasurementStyle)
-      })
-
-      if (
-        selectedPoint === undefined ||
-        selectedPoint[vcsLayerName] !== this.pointsLayer.name
-      ) {
-        pointsStore.resetPoint()
-        router.push('/home')
-        return event
-      }
-      selectedPoint.setStyle(HoverContinuousMeasurementStyle)
+    if (selectedPoint[vcsLayerName] == this.pointsLayer.name) {
       const pointType = 'real-time'
       const address = selectedPoint.getProperty('address')
       const status = selectedPoint.getProperty('status')
@@ -72,6 +55,55 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         latest_value,
         conformity
       )
+    } else if (selectedPoint[vcsLayerName] == this.spotPointsLayer.name) {
+      const pointType = 'spot-measurement'
+      pointsStore.setPointInformations(
+        pointType,
+        // values to modify from layer information when available
+        'address',
+        'ONLINE',
+        '12/12/2012 à 22h22',
+        1.5,
+        'conform'
+      )
+    }
+  }
+
+  async pipe(event: InteractionEvent): Promise<InteractionEvent> {
+    const pointsStore = usePointsStore()
+    const viewStore = useViewsStore()
+    const selectedPoint = event.feature as Feature<Geometry>
+
+    if (event.type & EventType.MOVE) {
+      if (
+        selectedPoint === undefined ||
+        !this.layers
+          .map((l) => l.name)
+          .includes(selectedPoint[vcsLayerName] as string)
+      ) {
+        document.body.style.cursor = 'default'
+        return event
+      }
+      document.body.style.cursor = 'pointer'
+      return event
+    } else if (event.type & EventType.CLICK) {
+      for (const layer of this.layers) {
+        layer.getFeatures().forEach((f) => {
+          f.setStyle(getUnselectedPointStyle)
+        })
+      }
+      if (
+        selectedPoint === undefined ||
+        !this.layers
+          .map((l) => l.name)
+          .includes(selectedPoint[vcsLayerName] as string)
+      ) {
+        pointsStore.resetPoint()
+        router.push('/home')
+        return event
+      }
+      selectedPoint.setStyle(getSelectedPointStyle)
+      this.setPointInformationsInStore(selectedPoint)
       if (viewStore.currentView === 'home') {
         router.push('/measurements')
       }

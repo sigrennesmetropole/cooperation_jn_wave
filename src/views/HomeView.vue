@@ -8,7 +8,7 @@ import { usePanelsStore } from '@/stores/panels'
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
 import { usePointsStore } from '@/stores/points'
-import { ContinuousMeasurementStyle } from '../../src/style/common'
+import { getUnselectedPointStyle } from '../../src/style/common'
 import { RENNES_LAYER } from '@/stores/layers'
 
 import type { RennesApp } from '@/services/RennesApp'
@@ -19,17 +19,22 @@ const panelsStore = usePanelsStore()
 const viewStore = useViewsStore()
 const pointStore = usePointsStore()
 
+function resetLayerStyle(layer: string) {
+  const pointsLayer = rennesApp.layers.getByKey(layer) as GeoJSONLayer
+
+  pointsLayer?.getFeatures().forEach((f) => {
+    f.setStyle(getUnselectedPointStyle)
+  })
+}
+
 onMounted(() => {
   viewStore.setCurrentView(viewList['home'])
   panelsStore.setTypePanelDisplay('left')
   panelsStore.isCompletelyHidden = false
   pointStore.resetPoint()
-  const pointsLayer = rennesApp.layers.getByKey(
-    RENNES_LAYER.customLayerContinuousMeasurement
-  ) as GeoJSONLayer
-  pointsLayer?.getFeatures().forEach((f) => {
-    f.setStyle(ContinuousMeasurementStyle)
-  })
+
+  resetLayerStyle(RENNES_LAYER.customLayerContinuousMeasurement)
+  resetLayerStyle(RENNES_LAYER.customLayerSpotData)
 })
 </script>
 

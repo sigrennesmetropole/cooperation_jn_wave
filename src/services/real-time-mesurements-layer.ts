@@ -3,7 +3,7 @@ import type { RennesApp } from './RennesApp'
 import { RENNES_LAYER } from '@/stores/layers'
 import { Feature } from 'ol'
 import { Point } from 'ol/geom'
-import { ContinuousMeasurementStyle } from '../../src/style/common'
+import { getUnselectedPointStyle } from '../../src/style/common'
 import { apiExemService } from '@/services/api-exem'
 
 export async function displayRealTimePoints(rennesApp: RennesApp) {
@@ -18,7 +18,7 @@ export async function displayRealTimePoints(rennesApp: RennesApp) {
       const point = new Point([longitude, latitude])
       const new_feature = new Feature(item)
       new_feature.setGeometry(point)
-      new_feature.setStyle(ContinuousMeasurementStyle)
+      new_feature.setStyle(getUnselectedPointStyle)
       customLayer.addFeatures([new_feature])
     }
   })

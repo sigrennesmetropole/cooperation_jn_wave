@@ -21,9 +21,9 @@ export const useCheckboxStore = defineStore('checkbox', () => {
   function toggleSpotDataPoint() {
     selectedPointSpotData.value = !selectedPointSpotData.value
     if (selectedPointSpotData.value == true) {
-      // layerStore.enableLayer(RENNES_LAYER.customLayerSpotData)
+      layerStore.enableLayer(RENNES_LAYER.customLayerSpotData)
     } else {
-      // layerStore.disableLayer(RENNES_LAYER.customLayerSpotData)
+      layerStore.disableLayer(RENNES_LAYER.customLayerSpotData)
     }
   }
 
