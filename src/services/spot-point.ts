@@ -17,10 +17,7 @@ export async function applySpotPointStyle(rennesApp: RennesApp) {
   const spotPointLayer: GeoJSONLayer = await rennesApp.getLayerByKey(
     'customLayerSpotData'
   )
-  if (spotPointLayer) {
-    spotPointLayer.clearStyle()
-    if (spotPointStyle()) {
-      spotPointLayer.setStyle(spotPointStyle())
-    }
+  if (spotPointStyle()) {
+    spotPointLayer.setStyle(spotPointStyle())
   }
 }

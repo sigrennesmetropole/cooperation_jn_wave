@@ -13,15 +13,29 @@ const selectedPointSpotData = ref<boolean>(true)
 const selectedPointEmitterSites = ref<boolean>(true)
 const selectedPointNewProjects = ref<boolean>(true)
 
-function addPointsOnMap(nameOfPoints: string) {
-  if (nameOfPoints == 'real-time') {
-    checkboxStore.toggleRealTimePoint()
-  } else if (nameOfPoints == 'spot-data') {
-    checkboxStore.toggleSpotDataPoint()
-  } else if (nameOfPoints == 'emitting-sites') {
-    checkboxStore.toggleEmitterSitesPoint()
-  } else if (nameOfPoints == 'new-projects') {
-    checkboxStore.toggleNewProjectPoint()
+enum PointType {
+  RealTime = 'real-time',
+  SpotData = 'spot-data',
+  EmittingSites = 'emitting-sites',
+  NewProjects = 'new-projects',
+}
+
+function addPointsOnMap(pointType: PointType) {
+  switch (pointType) {
+    case PointType.RealTime:
+      checkboxStore.toggleRealTimePoint()
+      break
+    case PointType.SpotData:
+      checkboxStore.toggleSpotDataPoint()
+      break
+    case PointType.EmittingSites:
+      checkboxStore.toggleEmitterSitesPoint()
+      break
+    case PointType.NewProjects:
+      checkboxStore.toggleNewProjectPoint()
+      break
+    default:
+      break
   }
 }
 </script>
@@ -38,7 +52,7 @@ function addPointsOnMap(nameOfPoints: string) {
         class="checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:outline-none focus:ring-1 focus:ring-white cursor-pointer"
         value="real-time"
         v-model="selectedPointRealTime"
-        @click="addPointsOnMap('real-time')"
+        @click="addPointsOnMap(PointType.RealTime)"
       />
       <label class="cursor-pointer flex flex-row" for="measurements">
         <img :src="RealTimeLogo" class="h-5 mr-3 my-auto" />Mesures en temps
@@ -53,7 +67,7 @@ function addPointsOnMap(nameOfPoints: string) {
         class="checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:outline-none focus:ring-1 focus:ring-white cursor-pointer"
         value="point-data"
         v-model="selectedPointSpotData"
-        @click="addPointsOnMap('spot-data')"
+        @click="addPointsOnMap(PointType.SpotData)"
       />
       <label class="cursor-pointer flex flex-row" for="measurements">
         <img :src="SpotMeasurementLogo" class="h-5 mr-3 my-auto" />Mesures
@@ -69,7 +83,7 @@ function addPointsOnMap(nameOfPoints: string) {
         class="checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:outline-none focus:ring-1 focus:ring-white cursor-pointer"
         value="wave-emitter-sites"
         v-model="selectedPointEmitterSites"
-        @click="addPointsOnMap('emitting-sites')"
+        @click="addPointsOnMap(PointType.EmittingSites)"
       />
       <label class="cursor-pointer flex flex-row" for="measurements">
         <img :src="SitesMeasurementLogo" class="h-5 mr-3 my-auto" />Sites
@@ -84,7 +98,7 @@ function addPointsOnMap(nameOfPoints: string) {
         class="checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:outline-none focus:ring-1 focus:ring-white cursor-pointer"
         value="new-projects"
         v-model="selectedPointNewProjects"
-        @click="addPointsOnMap('new-projects')"
+        @click="addPointsOnMap(PointType.NewProjects)"
       />
       <label class="cursor-pointer flex flex-row" for="measurements">
         <img :src="NewProjectsLogo" class="h-5 mr-3 my-auto" />Nouveaux projets

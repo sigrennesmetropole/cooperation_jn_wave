@@ -6,12 +6,13 @@ import spotIcon from '../assets/icons/spot.png'
 import { vcsLayerName } from '@vcmap/core'
 import { RENNES_LAYER } from '@/stores/layers'
 
+const layerIconMapping: { [x: string]: string } = {
+  [RENNES_LAYER.customLayerContinuousMeasurement]: continuousIcon,
+  [RENNES_LAYER.customLayerSpotData]: spotIcon,
+}
+
 function getIconFromLayerName(layerName) {
-  if (layerName === RENNES_LAYER.customLayerContinuousMeasurement) {
-    return continuousIcon
-  } else if (layerName === RENNES_LAYER.customLayerSpotData) {
-    return spotIcon
-  }
+  return layerIconMapping[layerName]
 }
 
 export function getUnselectedPointStyle(feature) {

@@ -11,10 +11,7 @@ import type { RennesApp } from '@/services/RennesApp'
 import { usePointsStore } from '@/stores/points'
 import { RENNES_LAYER } from '@/stores/layers'
 import { useViewsStore } from '@/stores/views'
-import {
-  getUnselectedPointStyle,
-  getSelectedPointStyle,
-} from '../../src/style/common'
+import { getUnselectedPointStyle, getSelectedPointStyle } from '../style/common'
 import router from '@/router'
 import type { Feature } from 'ol'
 import type { Geometry } from 'ol/geom'
@@ -41,19 +38,13 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     const pointsStore = usePointsStore()
 
     if (selectedPoint[vcsLayerName] == this.pointsLayer.name) {
-      const pointType = 'real-time'
-      const address = selectedPoint.getProperty('address')
-      const status = selectedPoint.getProperty('status')
-      const lastCom = selectedPoint.getProperty('lastCom')
-      const latest_value = selectedPoint.getProperty('latest_value')
-      const conformity = selectedPoint.getProperty('conformity')
       pointsStore.setPointInformations(
-        pointType,
-        address,
-        status,
-        lastCom,
-        latest_value,
-        conformity
+        'real-time',
+        selectedPoint.getProperty('address'),
+        selectedPoint.getProperty('status'),
+        selectedPoint.getProperty('lastCom'),
+        selectedPoint.getProperty('latest_value'),
+        selectedPoint.getProperty('conformity')
       )
     } else if (selectedPoint[vcsLayerName] == this.spotPointsLayer.name) {
       const pointType = 'spot-measurement'
