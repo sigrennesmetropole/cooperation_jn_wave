@@ -110,8 +110,16 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
       }
       selectedPoint.setStyle(getSelectedPointStyle)
       this.setPointInformationsInStore(selectedPoint)
-      if (viewStore.currentView === 'home') {
+      if (
+        viewStore.currentView === 'home' &&
+        selectedPoint[vcsLayerName] != 'customLayerNewProject'
+      ) {
         router.push('/measurements')
+      } else if (
+        viewStore.currentView === 'measurements' &&
+        selectedPoint[vcsLayerName] == 'customLayerNewProject'
+      ) {
+        router.push('/')
       }
       return event
     } else return event
