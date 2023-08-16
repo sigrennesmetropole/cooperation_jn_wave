@@ -20,6 +20,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
   private _rennesApp: RennesApp
   pointsLayer: GeoJSONLayer
   spotPointsLayer: GeoJSONLayer
+  newPointsLayer: GeoJSONLayer
   layers: GeoJSONLayer[]
 
   constructor(rennesApp: RennesApp) {
@@ -31,7 +32,10 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     this.spotPointsLayer = this._rennesApp.layers.getByKey(
       RENNES_LAYER.customLayerSpotData
     ) as GeoJSONLayer
-    this.layers = [this.pointsLayer, this.spotPointsLayer]
+    this.newPointsLayer = this._rennesApp.layers.getByKey(
+      RENNES_LAYER.customLayerNewProject
+    ) as GeoJSONLayer
+    this.layers = [this.pointsLayer, this.spotPointsLayer, this.newPointsLayer]
   }
 
   setPointInformationsInStore(selectedPoint: Feature) {
@@ -56,6 +60,17 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         '12/12/2012 à 22h22',
         1.5,
         'conform'
+      )
+    } else if (selectedPoint[vcsLayerName] == this.newPointsLayer.name) {
+      const pointType = 'new-projects'
+      pointsStore.setPointInformations(
+        pointType,
+        // values to modify from layer information when available
+        'address new sites',
+        '',
+        '',
+        0,
+        ''
       )
     }
   }

@@ -3,12 +3,14 @@
 import { Icon, Style } from 'ol/style'
 import continuousIcon from '../assets/icons/continuous.png'
 import spotIcon from '../assets/icons/spot.png'
+import newIcon from '../assets/icons/new.png'
 import { vcsLayerName } from '@vcmap/core'
 import { RENNES_LAYER } from '@/stores/layers'
 
 const layerIconMapping: { [x: string]: string } = {
   [RENNES_LAYER.customLayerContinuousMeasurement]: continuousIcon,
   [RENNES_LAYER.customLayerSpotData]: spotIcon,
+  [RENNES_LAYER.customLayerNewProject]: newIcon,
 }
 
 function getIconFromLayerName(layerName) {

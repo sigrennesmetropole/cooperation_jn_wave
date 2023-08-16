@@ -39,9 +39,9 @@ export const useCheckboxStore = defineStore('checkbox', () => {
   function toggleNewProjectPoint() {
     selectedPointNewProjects.value = !selectedPointNewProjects.value
     if (selectedPointNewProjects.value == true) {
-      // layerStore.enableLayer(RENNES_LAYER.customLayerNewProjects)
+      layerStore.enableLayer(RENNES_LAYER.customLayerNewProject)
     } else {
-      // layerStore.disableLayer(RENNES_LAYER.customLayerNewprojects)
+      layerStore.disableLayer(RENNES_LAYER.customLayerNewProject)
     }
   }
 

@@ -35,6 +35,7 @@ onMounted(() => {
 
   resetLayerStyle(RENNES_LAYER.customLayerContinuousMeasurement)
   resetLayerStyle(RENNES_LAYER.customLayerSpotData)
+  resetLayerStyle(RENNES_LAYER.customLayerNewProject)
 })
 </script>
 
