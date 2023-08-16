@@ -30,9 +30,9 @@ export const useCheckboxStore = defineStore('checkbox', () => {
   function toggleEmitterSitesPoint() {
     selectedPointEmitterSites.value = !selectedPointEmitterSites.value
     if (selectedPointEmitterSites.value == true) {
-      // layerStore.enableLayer(RENNES_LAYER.customLayerEmitterSites)
+      layerStore.enableLayer(RENNES_LAYER.customLayerEmitterSites)
     } else {
-      // layerStore.disableLayer(RENNES_LAYER.customLayerEmitterSites)
+      layerStore.disableLayer(RENNES_LAYER.customLayerEmitterSites)
     }
   }
 
