@@ -7,6 +7,7 @@ import { updateInteractionsStoreAfterViewChange } from '@/services/interactionUt
 import type { Layer } from '@vcmap/core'
 import NavigationButtons from '@/components/map/buttons/NavigationButtons.vue'
 import PointFilterComponent from '@/components/map/PointFilterComponent.vue'
+import { applySpotPointStyle } from '@/services/spot-point'
 
 import { useMapStore } from '@/stores/map'
 import { useViewsStore } from '@/stores/views'
@@ -62,7 +63,7 @@ mapStore.$subscribe(async () => {
     }
   }
   if (viewStore.currentView === 'home') {
-    // await applyInstallationStyle(rennesApp)
+    await applySpotPointStyle(rennesApp)
   }
 })
 </script>

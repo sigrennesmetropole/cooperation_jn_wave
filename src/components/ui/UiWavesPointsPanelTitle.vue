@@ -4,23 +4,34 @@ import spotMeasurementLogo from '@/assets/icons/spot-measurement-logo.svg'
 import sitesLogo from '@/assets/icons/sites-logo.svg'
 import BackButton from '@/components/home/BackButton.vue'
 
-import { ref } from 'vue'
+import { computed } from 'vue'
 import { usePointsStore } from '@/stores/points'
 
 const pointStore = usePointsStore()
-const title = ref('')
-const img = ref('')
 
-if (pointStore.pointType == 'real-time') {
-  title.value = 'Mesure en temps réel'
-  img.value = realTimeLogo
-} else if (pointStore.pointType == 'spot-measurement') {
-  title.value = 'Mesure ponctuelle'
-  img.value = spotMeasurementLogo
-} else {
-  title.value = 'Site émetteur'
-  img.value = sitesLogo
-}
+const data = computed(() => {
+  if (pointStore.pointType == 'real-time') {
+    return {
+      title: 'Mesure en temps réel',
+      img: realTimeLogo,
+    }
+  } else if (pointStore.pointType == 'spot-measurement') {
+    return {
+      title: 'Mesure ponctuelle',
+      img: spotMeasurementLogo,
+    }
+  } else if (pointStore.pointType == 'emitter-sites') {
+    return {
+      title: 'Site émetteur',
+      img: sitesLogo,
+    }
+  } else {
+    return {
+      title: '',
+      img: '',
+    }
+  }
+})
 </script>
 
 <template>
@@ -28,9 +39,9 @@ if (pointStore.pointType == 'real-time') {
     <div class="flex items-center p-0 gap-4">
       <BackButton title="Retour vers la page d'accueil."></BackButton>
       <div class="flex gap-3">
-        <img :src="img" class="h-12" />
+        <img :src="data.img" class="h-12" />
         <h1 class="font-dm-sans font-bold text-2xl text-center my-auto">
-          {{ title }}
+          {{ data.title }}
         </h1>
       </div>
     </div>

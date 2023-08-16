@@ -2,11 +2,35 @@
 
 import { Icon, Style } from 'ol/style'
 import continuousIcon from '../assets/icons/continuous.png'
+import spotIcon from '../assets/icons/spot.png'
+import { vcsLayerName } from '@vcmap/core'
+import { RENNES_LAYER } from '@/stores/layers'
 
-export const ContinuousMeasurementStyle: Style = new Style({
-  image: new Icon({
-    opacity: 1,
-    src: continuousIcon,
-    scale: 1,
-  }),
-})
+const layerIconMapping: { [x: string]: string } = {
+  [RENNES_LAYER.customLayerContinuousMeasurement]: continuousIcon,
+  [RENNES_LAYER.customLayerSpotData]: spotIcon,
+}
+
+function getIconFromLayerName(layerName) {
+  return layerIconMapping[layerName]
+}
+
+export function getUnselectedPointStyle(feature) {
+  return new Style({
+    image: new Icon({
+      opacity: 1,
+      src: getIconFromLayerName(feature[vcsLayerName]),
+      scale: 1,
+    }),
+  })
+}
+
+export function getSelectedPointStyle(feature) {
+  return new Style({
+    image: new Icon({
+      opacity: 1,
+      src: getIconFromLayerName(feature[vcsLayerName]),
+      scale: 1.3,
+    }),
+  })
+}
