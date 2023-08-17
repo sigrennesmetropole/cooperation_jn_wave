@@ -58,3 +58,38 @@ export function cloneViewPointAndResetCameraPosition(
   const newVp = new Viewpoint(vpJson)
   return newVp
 }
+
+const degreeToRadian = (degree: number): number => {
+  return degree * (Math.PI / 180.0)
+}
+
+// Tilt the view point (e.g. when switch from 2D to 3D)
+export function tiltViewpoint(viewpoint: Viewpoint, tiltDegree: number = 45) {
+  const vpJson: ViewpointOptions = viewpoint?.toJSON() as ViewpointOptions
+  vpJson.cameraPosition = undefined
+  vpJson.animate = true
+  vpJson.duration = 0.5
+
+  vpJson.distance = viewpoint.distance * Math.sin(degreeToRadian(tiltDegree))
+  vpJson.pitch = -tiltDegree
+
+  const newVp = new Viewpoint(vpJson)
+  return newVp
+}
+
+// Reset the tilt the view point (e.g. when switch from 3D to 2D)
+export function untiltViewpoint(
+  viewpoint: Viewpoint,
+  untiltDegree: number = 45
+) {
+  const vpJson: ViewpointOptions = viewpoint?.toJSON() as ViewpointOptions
+  vpJson.cameraPosition = undefined
+  vpJson.animate = true
+  vpJson.duration = 0.5
+
+  vpJson.distance = viewpoint.distance / Math.sin(degreeToRadian(untiltDegree))
+  vpJson.pitch = -90
+
+  const newVp = new Viewpoint(vpJson)
+  return newVp
+}

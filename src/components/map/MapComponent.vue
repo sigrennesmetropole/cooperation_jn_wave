@@ -8,14 +8,16 @@ import type { Layer } from '@vcmap/core'
 import NavigationButtons from '@/components/map/buttons/NavigationButtons.vue'
 import PointFilterComponent from '@/components/map/PointFilterComponent.vue'
 import { applySpotPointStyle } from '@/services/spot-point'
+import { tiltViewpoint, untiltViewpoint } from '@/services/viewPointHelper'
 
-import { useMapStore } from '@/stores/map'
+import { useMapStore, useMapViewPointStore } from '@/stores/map'
 import { useViewsStore } from '@/stores/views'
 
 const rennesApp = inject('rennesApp') as RennesApp
 const layerStore = useLayersStore()
 const mapStore = useMapStore()
 const viewStore = useViewsStore()
+const mapViewPointStore = useMapViewPointStore()
 
 onMounted(async () => {
   await rennesApp.initializeMap()
@@ -26,7 +28,17 @@ onMounted(async () => {
 })
 
 async function updateActiveMap() {
-  await mapStore.activate2d()
+  const oldViewpoint = await rennesApp.maps.activeMap.getViewpoint()
+
+  await rennesApp.maps.setActiveMap(mapStore.activeMap)
+
+  let newViewpoint
+  if (mapStore.is3D()) {
+    newViewpoint = tiltViewpoint(oldViewpoint!)
+  } else {
+    newViewpoint = untiltViewpoint(oldViewpoint!)
+  }
+  await rennesApp.maps.activeMap.gotoViewpoint(newViewpoint)
 }
 
 async function updateLayersVisibility() {
@@ -44,6 +56,25 @@ async function setLayerVisible(layerName: string, visible: boolean) {
   }
 }
 
+async function updateViewPoint(viewPoint: string) {
+  const activeMap = rennesApp.maps.activeMap
+  let selectedViewPoint = rennesApp.viewpoints.getByKey(viewPoint)
+
+  if (selectedViewPoint) {
+    if (mapStore.is3D()) {
+      selectedViewPoint = tiltViewpoint(selectedViewPoint!)
+    }
+    await activeMap.gotoViewpoint(selectedViewPoint)
+  } else {
+    // go to home
+    let homeViewPoint = rennesApp.viewpoints.getByKey('rennes')
+    if (mapStore.is3D()) {
+      homeViewPoint = tiltViewpoint(homeViewPoint!)
+    }
+    await activeMap.gotoViewpoint(homeViewPoint!)
+  }
+}
+
 layerStore.$subscribe(async () => {
   await updateLayersVisibility()
 })
@@ -54,6 +85,7 @@ viewStore.$subscribe(async () => {
 })
 
 mapStore.$subscribe(async () => {
+  await updateActiveMap()
   if (rennesApp.maps.activeMap.name !== mapStore.activeMap) {
     await rennesApp.maps.setActiveMap(mapStore.activeMap)
   }
@@ -65,6 +97,10 @@ mapStore.$subscribe(async () => {
   if (viewStore.currentView === 'home') {
     await applySpotPointStyle(rennesApp)
   }
+})
+
+mapViewPointStore.$subscribe(async () => {
+  await updateViewPoint(mapViewPointStore.viewPoint)
 })
 </script>
 

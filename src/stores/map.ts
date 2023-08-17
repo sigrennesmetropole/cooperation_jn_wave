@@ -47,3 +47,25 @@ export const useMapStore = defineStore('map', () => {
     toggle3D,
   }
 })
+
+export const useMapViewPointStore = defineStore('map-viewpoint', () => {
+  // Map state
+  const viewPoint: Ref<string> = ref('rennes') // See the map.config.json
+
+  const eventRandomId: Ref<number> = ref(0)
+
+  function triggerEvent() {
+    eventRandomId.value = Math.random()
+  }
+  function updateViewpoint(viewpoint: string, force: boolean = false) {
+    viewPoint.value = viewpoint
+    if (force) {
+      triggerEvent()
+    }
+  }
+
+  return {
+    viewPoint,
+    updateViewpoint,
+  }
+})

@@ -47,6 +47,7 @@ async function zoom(out = false, zoomFactor = 2): Promise<void> {
 
 async function resetZoom() {
   let newVp
+  newVp = rennesApp.getHomeViewpoint()
   if ([viewList['home']].includes(viewStore.currentView!)) {
     newVp = rennesApp.getHomeViewpoint()
   } else {
