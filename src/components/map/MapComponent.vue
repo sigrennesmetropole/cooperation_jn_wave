@@ -7,6 +7,7 @@ import { updateInteractionsStoreAfterViewChange } from '@/services/interactionUt
 import type { Layer } from '@vcmap/core'
 import NavigationButtons from '@/components/map/buttons/NavigationButtons.vue'
 import PointFilterComponent from '@/components/map/PointFilterComponent.vue'
+import NewSiteTooltip from '@/components/map/NewSiteTooltip.vue'
 import { applySpotPointStyle } from '@/services/spot-point'
 import { applyEmitterSitesPointStyle } from '@/services/emitter-sites'
 import { applyNewPointStyle } from '@/services/new-project'
@@ -75,5 +76,6 @@ mapStore.$subscribe(async () => {
 <template>
   <UiMap></UiMap>
   <PointFilterComponent></PointFilterComponent>
+  <NewSiteTooltip />
   <NavigationButtons />
 </template>
