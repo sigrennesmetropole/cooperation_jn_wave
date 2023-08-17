@@ -30,18 +30,18 @@ export const useCheckboxStore = defineStore('checkbox', () => {
   function toggleEmitterSitesPoint() {
     selectedPointEmitterSites.value = !selectedPointEmitterSites.value
     if (selectedPointEmitterSites.value == true) {
-      // layerStore.enableLayer(RENNES_LAYER.customLayerEmitterSites)
+      layerStore.enableLayer(RENNES_LAYER.customLayerEmitterSites)
     } else {
-      // layerStore.disableLayer(RENNES_LAYER.customLayerEmitterSites)
+      layerStore.disableLayer(RENNES_LAYER.customLayerEmitterSites)
     }
   }
 
   function toggleNewProjectPoint() {
     selectedPointNewProjects.value = !selectedPointNewProjects.value
     if (selectedPointNewProjects.value == true) {
-      // layerStore.enableLayer(RENNES_LAYER.customLayerNewProjects)
+      layerStore.enableLayer(RENNES_LAYER.customLayerNewProject)
     } else {
-      // layerStore.disableLayer(RENNES_LAYER.customLayerNewprojects)
+      layerStore.disableLayer(RENNES_LAYER.customLayerNewProject)
     }
   }
 

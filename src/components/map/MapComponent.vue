@@ -8,6 +8,8 @@ import type { Layer } from '@vcmap/core'
 import NavigationButtons from '@/components/map/buttons/NavigationButtons.vue'
 import PointFilterComponent from '@/components/map/PointFilterComponent.vue'
 import { applySpotPointStyle } from '@/services/spot-point'
+import { applyEmitterSitesPointStyle } from '@/services/emitter-sites'
+import { applyNewPointStyle } from '@/services/new-project'
 
 import { useMapStore } from '@/stores/map'
 import { useViewsStore } from '@/stores/views'
@@ -64,6 +66,8 @@ mapStore.$subscribe(async () => {
   }
   if (viewStore.currentView === 'home') {
     await applySpotPointStyle(rennesApp)
+    await applyEmitterSitesPointStyle(rennesApp)
+    await applyNewPointStyle(rennesApp)
   }
 })
 </script>
