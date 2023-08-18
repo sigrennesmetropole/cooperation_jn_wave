@@ -13,8 +13,12 @@ import { RENNES_LAYER } from '@/stores/layers'
 import { useViewsStore } from '@/stores/views'
 import { getUnselectedPointStyle, getSelectedPointStyle } from '../style/common'
 import router from '@/router'
-import type { Feature } from 'ol'
+import Feature from 'ol/Feature'
 import type { Geometry } from 'ol/geom'
+import {
+  addGenericListenerForUpdatePositions,
+  updatePointCoordinates,
+} from '../services/AboveMapService'
 
 class mapClickAndMoveInteraction extends AbstractInteraction {
   private _rennesApp: RennesApp
@@ -97,6 +101,18 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     }
   }
 
+  async _interactionNewProject(event: InteractionEvent, geometry: Geometry) {
+    const pointsStore = usePointsStore()
+    if (event.type & EventType.CLICK) {
+      if (event.position === undefined) {
+        return
+      }
+      const new_feature = new Feature()
+      new_feature.setGeometry(geometry)
+      pointsStore.setNewPointFeatureOnSelectedInstallation(new_feature)
+    }
+  }
+
   async pipe(event: InteractionEvent): Promise<InteractionEvent> {
     const pointsStore = usePointsStore()
     const viewStore = useViewsStore()
@@ -132,6 +148,12 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
       }
       selectedPoint.setStyle(getSelectedPointStyle)
       this.setPointInformationsInStore(selectedPoint)
+      if (selectedPoint[vcsLayerName] == 'customLayerNewProject') {
+        await this._interactionNewProject(event, selectedPoint.getGeometry()!)
+        updatePointCoordinates(this._rennesApp, 'point')
+        addGenericListenerForUpdatePositions(this._rennesApp, 'point')
+        event.stopPropagation = true
+      }
       if (
         viewStore.currentView === 'home' &&
         selectedPoint[vcsLayerName] != 'customLayerNewProject'
@@ -141,7 +163,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         viewStore.currentView === 'measurements' &&
         selectedPoint[vcsLayerName] == 'customLayerNewProject'
       ) {
-        router.push('/')
+        router.push('/home')
       }
       return event
     } else return event
