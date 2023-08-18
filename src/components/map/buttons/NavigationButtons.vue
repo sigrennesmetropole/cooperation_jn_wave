@@ -13,15 +13,11 @@ import CompassComponent from '@/components/map/CompassComponent.vue'
 import IconMeasure from '@/assets/icons/measure-tool.png'
 import UiDescribe3DMode from '@/components/map/UiDescribe3DMode.vue'
 
-import { useViewsStore } from '@/stores/views'
-import { viewList } from '@/model/views.model'
 import type { RennesApp } from '@/services/RennesApp'
 import { usePanelsStore, PANEL_WIDTH } from '@/stores/panels'
 import { useMapStore } from '@/stores/map'
-import type { Viewpoint } from '@vcmap/core'
 
 const rennesApp = inject('rennesApp') as RennesApp
-const viewStore = useViewsStore()
 const panelStore = usePanelsStore()
 const mapStore = useMapStore()
 
@@ -48,14 +44,6 @@ async function zoom(out = false, zoomFactor = 2): Promise<void> {
 async function resetZoom() {
   let newVp
   newVp = rennesApp.getHomeViewpoint()
-  if ([viewList['home']].includes(viewStore.currentView!)) {
-    newVp = rennesApp.getHomeViewpoint()
-  } else {
-    newVp = mapStore.viewPoint as Viewpoint
-    if (mapStore.viewPointPrevious !== null && !newVp.groundPosition[2]) {
-      newVp = mapStore.viewPointPrevious
-    }
-  }
   await rennesApp.maps?.activeMap.gotoViewpoint(newVp)
 }
 
