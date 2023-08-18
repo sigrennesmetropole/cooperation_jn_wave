@@ -20,9 +20,9 @@ function goToAnfr() {
       <span class="font-medium"
         >la carte des sites et des mesures radioélectriques de l’Anfr</span
       >
-      permet la consultation des rapports détaillés des mesures de champs
-      électromagnétiques ainsi que des informations sur les sites
-      radioélectriques en France.
+      permet la consultation des informations détaillées sur les sites
+      radioélectriques en France ainsi que des rapports des mesures de champs
+      électromagnétiques.
     </p>
     <UiButton
       class="border border-black rounded-lg gap-3 px-4 py-3 justify-center flex flex-row mt-2 cursor-pointer w-fit"
