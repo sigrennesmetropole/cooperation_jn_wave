@@ -89,13 +89,13 @@ mapStore.$subscribe(async () => {
   if (rennesApp.maps.activeMap.name !== mapStore.activeMap) {
     await rennesApp.maps.setActiveMap(mapStore.activeMap)
   }
+  if (viewStore.currentView === 'home') {
+    await applySpotPointStyle(rennesApp)
+  }
   if (rennesApp.maps.activeMap.getViewpointSync() !== mapStore.viewPoint!) {
     if (mapStore.isInitializeMap) {
       await rennesApp.maps.activeMap.gotoViewpoint(mapStore.viewPoint!)
     }
-  }
-  if (viewStore.currentView === 'home') {
-    await applySpotPointStyle(rennesApp)
   }
 })
 
