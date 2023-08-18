@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
+import type { Feature } from 'ol'
 
 export const usePointsStore = defineStore('point', () => {
   const pointType: Ref<string> = ref('')
@@ -9,6 +10,9 @@ export const usePointsStore = defineStore('point', () => {
   const lastCom: Ref<string> = ref('')
   const latest_value: Ref<number> = ref(0)
   const conformity: Ref<string> = ref('')
+  const newPointAbscissa: Ref<number> = ref(0)
+  const newPointOrdinate: Ref<number> = ref(0)
+  const pointFeature: Ref<Feature | null> = ref(null)
 
   function setPointInformations(
     new_pointType: string,
@@ -30,6 +34,15 @@ export const usePointsStore = defineStore('point', () => {
     setPointInformations('', '', '', '', 0, '')
   }
 
+  function setNewCoordinates(newAbscissa: number, newOrdinate: number) {
+    newPointAbscissa.value = newAbscissa
+    newPointOrdinate.value = newOrdinate
+  }
+
+  function setNewPointFeatureOnSelectedInstallation(newPointFeature: Feature) {
+    pointFeature.value = newPointFeature
+  }
+
   return {
     pointType,
     address,
@@ -37,7 +50,12 @@ export const usePointsStore = defineStore('point', () => {
     lastCom,
     latest_value,
     conformity,
+    newPointAbscissa,
+    newPointOrdinate,
+    pointFeature,
     setPointInformations,
     resetPoint,
+    setNewCoordinates,
+    setNewPointFeatureOnSelectedInstallation,
   }
 })

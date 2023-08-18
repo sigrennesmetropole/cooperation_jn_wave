@@ -7,7 +7,6 @@ import { inject, onMounted } from 'vue'
 import { usePanelsStore } from '@/stores/panels'
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
-import { usePointsStore } from '@/stores/points'
 import { getUnselectedPointStyle } from '../../src/style/common'
 import { RENNES_LAYER } from '@/stores/layers'
 
@@ -17,7 +16,6 @@ const rennesApp = inject('rennesApp') as RennesApp
 
 const panelsStore = usePanelsStore()
 const viewStore = useViewsStore()
-const pointStore = usePointsStore()
 
 function resetLayerStyle(layer: string) {
   const pointsLayer = rennesApp.layers.getByKey(layer) as GeoJSONLayer
@@ -31,10 +29,11 @@ onMounted(() => {
   viewStore.setCurrentView(viewList['home'])
   panelsStore.setTypePanelDisplay('left')
   panelsStore.isCompletelyHidden = false
-  pointStore.resetPoint()
 
   resetLayerStyle(RENNES_LAYER.customLayerContinuousMeasurement)
   resetLayerStyle(RENNES_LAYER.customLayerSpotData)
+  resetLayerStyle(RENNES_LAYER.customLayerEmitterSites)
+  resetLayerStyle(RENNES_LAYER.customLayerNewProject)
 })
 </script>
 
