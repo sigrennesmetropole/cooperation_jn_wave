@@ -2,7 +2,6 @@
 
 interface ImportMetaEnv {
   readonly URL_BACKOFFICE: string
-  readonly ENEDIS_SANDBOX_PRM: string
 }
 
 interface ImportMeta {
