@@ -17,12 +17,12 @@ function goToAnfr() {
     </div>
     <p class="font-dm-sans text-sm font-normal">
       Cartoradio,
-      <span class="font-medium"
+      <span class="font-semibold"
         >la carte des sites et des mesures radioélectriques de l’Anfr</span
       >
-      permet la consultation des informations détaillées sur les sites
-      radioélectriques en France ainsi que des rapports des mesures de champs
-      électromagnétiques.
+      permet la consultation des rapports détaillés des mesures de champs
+      électromagnétiques ainsi que des informations sur les sites
+      radioélectriques en France.
     </p>
     <UiButton
       class="border border-black rounded-lg gap-3 px-4 py-3 justify-center flex flex-row mt-2 cursor-pointer w-fit"
