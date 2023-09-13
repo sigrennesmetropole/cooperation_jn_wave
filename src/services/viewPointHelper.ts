@@ -1,8 +1,9 @@
 import { Viewpoint, type ViewpointOptions } from '@vcmap/core'
-import { destination, point } from '@turf/turf'
+import { point } from '@turf/turf'
 import type { BBox, Feature, Point, Properties } from '@turf/turf'
 
-const cameraDistance = 150
+// Same as the initial distance in map.config.json
+const cameraDistance = 400
 
 export function computeViewPoint(
   turfPoint: Feature<Point, Properties>,
