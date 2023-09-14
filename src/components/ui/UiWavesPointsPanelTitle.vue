@@ -5,22 +5,22 @@ import sitesLogo from '@/assets/icons/sites-logo.svg'
 import BackButton from '@/components/home/BackButton.vue'
 
 import { computed } from 'vue'
-import { usePointsStore } from '@/stores/points'
+import { PointType, usePointsStore } from '@/stores/points'
 
 const pointStore = usePointsStore()
 
 const data = computed(() => {
-  if (pointStore.pointType == 'real-time') {
+  if (pointStore.pointType == PointType.RealTime) {
     return {
       title: 'Mesure en temps réel',
       img: realTimeLogo,
     }
-  } else if (pointStore.pointType == 'spot-measurement') {
+  } else if (pointStore.pointType == PointType.SpotData) {
     return {
       title: 'Mesure ponctuelle',
       img: spotMeasurementLogo,
     }
-  } else if (pointStore.pointType == 'emitter-sites') {
+  } else if (pointStore.pointType == PointType.EmittingSites) {
     return {
       title: 'Site émetteur',
       img: sitesLogo,

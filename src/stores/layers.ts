@@ -53,6 +53,10 @@ export const useLayersStore = defineStore('layers', () => {
     }
   }
 
+  function isLayerVisible(name: RennesLayer) {
+    return visibilities.value[name]
+  }
+
   function update3DBaseLayer(is3D: boolean) {
     visibilities.value.rennesBase = !is3D
     visibilities.value.rennesOrtho = is3D
@@ -76,5 +80,6 @@ export const useLayersStore = defineStore('layers', () => {
     disableLayer,
     update3DBaseLayer,
     setLayerVisibility,
+    isLayerVisible,
   }
 })

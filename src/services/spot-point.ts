@@ -1,7 +1,7 @@
 import spotIcon from '../assets/icons/spot.png'
-import type { GeoJSONLayer } from '@vcmap/core'
 import { Icon, Style } from 'ol/style'
 import type { RennesApp } from './RennesApp'
+import type { GeoJSONLayer } from '@vcmap/core'
 
 export function spotPointStyle() {
   return new Style({

@@ -1,17 +1,17 @@
 import {
   AbstractInteraction,
   EventType,
+  GeoJSONLayer,
+  type InteractionEvent,
   ModificationKeyType,
   PointerKeyType,
   vcsLayerName,
-  type InteractionEvent,
-  GeoJSONLayer,
 } from '@vcmap/core'
 import type { RennesApp } from '@/services/RennesApp'
-import { usePointsStore } from '@/stores/points'
+import { PointType, usePointsStore } from '@/stores/points'
 import { RENNES_LAYER } from '@/stores/layers'
 import { useViewsStore } from '@/stores/views'
-import { getUnselectedPointStyle, getSelectedPointStyle } from '../style/common'
+import { getSelectedPointStyle, getUnselectedPointStyle } from '../style/common'
 import router from '@/router'
 import Feature from 'ol/Feature'
 import type { Geometry } from 'ol/geom'
@@ -56,7 +56,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
 
     if (selectedPoint[vcsLayerName] == this.pointsLayer.name) {
       pointsStore.setPointInformations(
-        'real-time',
+        PointType.RealTime,
         selectedPoint.getProperty('address'),
         selectedPoint.getProperty('status'),
         selectedPoint.getProperty('lastCom'),
@@ -64,9 +64,8 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         selectedPoint.getProperty('conformity')
       )
     } else if (selectedPoint[vcsLayerName] == this.spotPointsLayer.name) {
-      const pointType = 'spot-measurement'
       pointsStore.setPointInformations(
-        pointType,
+        PointType.SpotData,
         // values to modify from layer information when available
         'address',
         'ONLINE',
@@ -77,9 +76,8 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     } else if (
       selectedPoint[vcsLayerName] == this.emitterSitesPointsLayer.name
     ) {
-      const pointType = 'emitter-sites'
       pointsStore.setPointInformations(
-        pointType,
+        PointType.EmittingSites,
         // values to modify from layer information when available
         '',
         '',
@@ -88,9 +86,8 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         ''
       )
     } else if (selectedPoint[vcsLayerName] == this.newPointsLayer.name) {
-      const pointType = 'new-projects'
       pointsStore.setPointInformations(
-        pointType,
+        PointType.NewProjects,
         // values to modify from layer information when available
         'address new sites',
         '',
@@ -143,7 +140,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
           .includes(selectedPoint[vcsLayerName] as string)
       ) {
         pointsStore.resetPoint()
-        router.push('/home')
+        await router.push('/home')
         return event
       }
       selectedPoint.setStyle(getSelectedPointStyle)
