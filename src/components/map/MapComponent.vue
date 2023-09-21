@@ -3,7 +3,6 @@ import { onMounted, inject } from 'vue'
 import type { RennesApp } from '@/services/RennesApp'
 import UiMap from '@/components/ui/UiMap.vue'
 import { RENNES_LAYERNAMES, useLayersStore } from '@/stores/layers'
-import { updateInteractionsStoreAfterViewChange } from '@/services/interactionUtils'
 import type { Layer } from '@vcmap/core'
 import NavigationButtons from '@/components/map/buttons/NavigationButtons.vue'
 import PointFilterComponent from '@/components/map/PointFilterComponent.vue'
@@ -15,6 +14,9 @@ import { applyNewPointStyle } from '@/services/new-project'
 
 import { useMapStore, useMapViewPointStore } from '@/stores/map'
 import { useViewsStore } from '@/stores/views'
+import { EventType } from '@vcmap/core'
+import mapClickAndMoveInteraction from '@/interactions/clickAndMoveInteraction'
+import { getUnselectedPointStyle } from '@/style/common'
 
 const rennesApp = inject('rennesApp') as RennesApp
 const layerStore = useLayersStore()
@@ -27,7 +29,10 @@ onMounted(async () => {
   await updateActiveMap()
   await updateLayersVisibility()
   // force initialization of the interaction on init page
-  updateInteractionsStoreAfterViewChange(rennesApp)
+  rennesApp.maps.eventHandler.addPersistentInteraction(
+    new mapClickAndMoveInteraction(rennesApp)
+  )
+  rennesApp.maps.eventHandler.featureInteraction.setActive(EventType.CLICKMOVE)
 })
 
 async function updateActiveMap() {
@@ -54,6 +59,7 @@ async function setLayerVisible(layerName: string, visible: boolean) {
   const layer: Layer = rennesApp.maps.layerCollection.getByKey(layerName)
   if (visible) {
     await layer?.activate()
+    await rennesApp.setLayerStyle(layerName, getUnselectedPointStyle)
   } else {
     layer?.deactivate()
   }
@@ -82,11 +88,6 @@ layerStore.$subscribe(async () => {
   await updateLayersVisibility()
 })
 
-viewStore.$subscribe(async () => {
-  // triger mandatory store change after changing view
-  updateInteractionsStoreAfterViewChange(rennesApp)
-})
-
 mapStore.$subscribe(async () => {
   await updateActiveMap()
   if (rennesApp.maps.activeMap.name !== mapStore.activeMap) {
@@ -97,7 +98,10 @@ mapStore.$subscribe(async () => {
     await applyEmitterSitesPointStyle(rennesApp)
     await applyNewPointStyle(rennesApp)
   }
-  if (rennesApp.maps.activeMap.getViewpointSync() !== mapStore.viewPoint!) {
+  if (
+    mapStore.viewPoint !== null &&
+    rennesApp.maps.activeMap.getViewpointSync() !== mapStore.viewPoint!
+  ) {
     if (mapStore.isInitializeMap) {
       await rennesApp.maps.activeMap.gotoViewpoint(mapStore.viewPoint!)
     }

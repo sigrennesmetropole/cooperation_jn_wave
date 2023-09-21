@@ -6,7 +6,7 @@ import DetailComponent from '@/components/ui/DetailComponent.vue'
 import WaveObservatoryComponent from '@/components/ui/WaveObservatoryComponent.vue'
 import CartoRadioComponent from '@/components/ui/CartoRadioComponent.vue'
 
-import { usePointsStore } from '@/stores/points'
+import { PointType, usePointsStore } from '@/stores/points'
 import { onMounted } from 'vue'
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
@@ -26,8 +26,8 @@ onMounted(() => {
   <PointInformationComponent>
     <template
       v-if="
-        pointStore.pointType == 'real-time' ||
-        pointStore.pointType == 'spot-measurement'
+        pointStore.pointType == PointType.RealTime ||
+        pointStore.pointType == PointType.SpotData
       "
       v-slot:content
     >

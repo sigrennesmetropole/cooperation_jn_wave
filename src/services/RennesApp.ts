@@ -5,10 +5,12 @@ import {
   Viewpoint,
   OpenlayersMap,
   GeoJSONLayer,
+  VectorLayer,
 } from '@vcmap/core'
 import type Map from 'ol/Map.js'
 import { useMapStore } from '@/stores/map'
 import type { RennesLayer } from '@/stores/layers'
+import type { Style } from 'ol/style'
 
 export class RennesApp extends VcsApp {
   readonly mapConfig
@@ -57,5 +59,14 @@ export class RennesApp extends VcsApp {
     }
 
     return layer
+  }
+
+  async setLayerStyle(layerName: string, layerStyle: (feature: any) => Style) {
+    const layer: VectorLayer = this.layers.getByKey(layerName) as VectorLayer
+    if (layer instanceof GeoJSONLayer) {
+      layer.getFeatures().forEach((f) => {
+        f.setStyle(layerStyle)
+      })
+    }
   }
 }

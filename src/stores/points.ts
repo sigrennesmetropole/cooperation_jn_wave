@@ -3,8 +3,14 @@ import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Feature } from 'ol'
 
+export enum PointType {
+  RealTime = 'real-time',
+  SpotData = 'spot-data',
+  EmittingSites = 'emitting-sites',
+  NewProjects = 'new-projects',
+}
 export const usePointsStore = defineStore('point', () => {
-  const pointType: Ref<string> = ref('')
+  const pointType: Ref<PointType | null> = ref(null)
   const address: Ref<string> = ref('')
   const status: Ref<string> = ref('')
   const lastCom: Ref<string> = ref('')
@@ -15,7 +21,7 @@ export const usePointsStore = defineStore('point', () => {
   const pointFeature: Ref<Feature | null> = ref(null)
 
   function setPointInformations(
-    new_pointType: string,
+    new_pointType: PointType | null,
     new_address: string,
     new_status: string,
     new_lastCom: string,
@@ -31,7 +37,13 @@ export const usePointsStore = defineStore('point', () => {
   }
 
   function resetPoint() {
-    setPointInformations('', '', '', '', 0, '')
+    setPointInformations(null, '', '', '', 0, '')
+  }
+
+  async function resetPointByType(pointTypeToReset: PointType) {
+    if (pointType.value === pointTypeToReset) {
+      resetPoint()
+    }
   }
 
   function setNewCoordinates(newAbscissa: number, newOrdinate: number) {
@@ -57,5 +69,6 @@ export const usePointsStore = defineStore('point', () => {
     resetPoint,
     setNewCoordinates,
     setNewPointFeatureOnSelectedInstallation,
+    resetPointByType,
   }
 })

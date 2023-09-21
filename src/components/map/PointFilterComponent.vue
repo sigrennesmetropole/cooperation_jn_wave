@@ -1,26 +1,22 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import RealTimeLogo from '@/assets/icons/real-time-logo.svg'
 import SpotMeasurementLogo from '@/assets/icons/spot-measurement-logo.svg'
 import SitesMeasurementLogo from '@/assets/icons/sites-logo.svg'
 import NewProjectsLogo from '@/assets/icons/sitesNext.svg'
-import { ref } from 'vue'
 import { useCheckboxStore } from '@/stores/checkbox'
+import { PointType, usePointsStore } from '@/stores/points'
 
 const checkboxStore = useCheckboxStore()
+const pointsStore = usePointsStore()
 
 const selectedPointRealTime = ref<boolean>(true)
 const selectedPointSpotData = ref<boolean>(true)
 const selectedPointEmitterSites = ref<boolean>(true)
 const selectedPointNewProjects = ref<boolean>(true)
 
-enum PointType {
-  RealTime = 'real-time',
-  SpotData = 'spot-data',
-  EmittingSites = 'emitting-sites',
-  NewProjects = 'new-projects',
-}
-
 function addPointsOnMap(pointType: PointType) {
+  pointsStore.resetPointByType(pointType)
   switch (pointType) {
     case PointType.RealTime:
       checkboxStore.toggleRealTimePoint()
