@@ -27,27 +27,38 @@ const ConformityLabel = computed(() => {
       <p class="font-dm-sans font-medium text-base text-neutral-600">
         {{ pointStore.address }}
       </p>
-      <UiButtonWithTooltip
-        widthButton="4"
-        heightButton="4"
-        zIndex="z-10"
-        text="La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’alerte maximal."
-        widthBoxText="w-[300px]"
-        positionTop="4px"
-      ></UiButtonWithTooltip>
+      <p class="font-dm-sans font-normal text-sm text-neutral-400">
+        Mesure effectuée le {{ pointStore.lastCom }}
+      </p>
     </div>
-    <p class="font-dm-sans font-normal text-sm text-neutral-400">
-      Mesure effectuée le {{ pointStore.lastCom }}
-    </p>
     <div
       v-if="pointStore.status == 'ONLINE'"
       class="flex flex-row justify-between"
     >
-      <p class="font-dm-sans font-bold text-lg leading-6 text-green-500">
-        <span class="text-2xl">{{ pointStore.latest_value }}</span> V/m
-      </p>
+      <div class="flex justify-start items-center gap-5">
+        <div class="flex-1 flex">
+          <p class="font-dm-sans font-bold text-lg leading-6 text-green-500">
+            <span class="text-2xl">{{ pointStore.latest_value }}</span> V/m
+          </p>
+        </div>
+
+        <div class="relative w-8 h-4">
+          <!-- A little bit hacky with positionRight, it works fine if I only use number, but if I put the unit, it will give bad location of the tooltip -->
+          <UiButtonWithTooltip
+            widthButton="4"
+            heightButton="4"
+            zIndex="z-10"
+            text="La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’alerte maximal."
+            widthBoxText="w-[300px]"
+            positionRight="4"
+            positionTop="0px"
+          ></UiButtonWithTooltip>
+        </div>
+      </div>
+
       <img :src="ConformityLabel ? ConformityLabel : undefined" />
     </div>
+
     <div
       v-if="pointStore.status == 'MAINTENANCE'"
       class="flex flex-row justify-between"
