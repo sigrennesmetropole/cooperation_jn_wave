@@ -64,14 +64,19 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         selectedPoint.getProperty('conformity')
       )
     } else if (selectedPoint[vcsLayerName] == this.spotPointsLayer.name) {
+      let conformity = ''
+      if (selectedPoint.getProperty('mesure_conformite') === 'Oui') {
+        conformity = 'conform'
+      }
       pointsStore.setPointInformations(
         PointType.SpotData,
-        // values to modify from layer information when available
-        'address',
-        'ONLINE',
-        '12/12/2012 à 22h22',
-        1.5,
-        'conform'
+        `${selectedPoint.getProperty('adresse')}, ${selectedPoint.getProperty(
+          'commune_nom'
+        )}`,
+        'ONLINE', // TODO(IS): hard coded for now
+        selectedPoint.getProperty('mesure_date'),
+        selectedPoint.getProperty('mesure_niveau') as number,
+        conformity
       )
     } else if (
       selectedPoint[vcsLayerName] == this.emitterSitesPointsLayer.name
