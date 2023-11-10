@@ -10,7 +10,6 @@ import { PointType, usePointsStore } from '@/stores/points'
 const pointStore = usePointsStore()
 
 const data = computed(() => {
-  console.log(`${pointStore.pointType}`)
   if (pointStore.pointType == PointType.RealTime) {
     return {
       title: 'Mesure en temps réel',
