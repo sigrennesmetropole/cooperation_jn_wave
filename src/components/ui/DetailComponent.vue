@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePointsStore } from '@/stores/points'
+import { usePointsStore, PointType } from '@/stores/points'
 import { UiButtonWithTooltip } from '@sigrennesmetropole/cooperation_jn_common_ui'
 import StandardIcon from '@/assets/icons/standard.svg'
 import UnderSurveillanceIcon from '@/assets/icons/under-surveillance.svg'
@@ -19,6 +19,22 @@ const ConformityLabel = computed(() => {
     return null
   }
 })
+
+const unit = computed(() => {
+  if (pointStore.pointType == PointType.EmittingSites) {
+    return 'm'
+  } else {
+    return 'V/m'
+  }
+})
+
+const prefix = computed(() => {
+  if (pointStore.pointType == PointType.EmittingSites) {
+    return ''
+  } else {
+    return 'Mesure effectuée le '
+  }
+})
 </script>
 
 <template>
@@ -28,7 +44,7 @@ const ConformityLabel = computed(() => {
         {{ pointStore.address }}
       </p>
       <p class="font-dm-sans font-normal text-sm text-neutral-400">
-        Mesure effectuée le {{ pointStore.lastCom }}
+        {{ prefix }}{{ pointStore.lastCom }}
       </p>
     </div>
     <div
@@ -37,8 +53,15 @@ const ConformityLabel = computed(() => {
     >
       <div class="flex justify-start items-center gap-5">
         <div class="flex-1 flex">
-          <p class="font-dm-sans font-bold text-lg leading-6 text-green-500">
-            <span class="text-2xl">{{ pointStore.latest_value }}</span> V/m
+          <p
+            class="font-dm-sans font-bold text-lg leading-6"
+            :class="{
+              'text-black': pointStore.pointType == PointType.EmittingSites,
+              'text-green-500': pointStore.pointType != PointType.EmittingSites,
+            }"
+          >
+            <span class="text-2xl">{{ pointStore.latest_value }}</span>
+            {{ unit }}
           </p>
         </div>
 

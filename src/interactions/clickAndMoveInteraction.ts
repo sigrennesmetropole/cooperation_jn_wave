@@ -81,13 +81,14 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     } else if (
       selectedPoint[vcsLayerName] == this.emitterSitesPointsLayer.name
     ) {
+      console.log(selectedPoint.getProperties())
       pointsStore.setPointInformations(
         PointType.EmittingSites,
         // values to modify from layer information when available
-        '',
-        '',
-        '',
-        0,
+        `${selectedPoint.getProperty('adresse')}`,
+        'ONLINE', // TODO(IS): hard coded for now
+        selectedPoint.getProperty('support_nature'),
+        selectedPoint.getProperty('support_hauteur') as number,
         ''
       )
     } else if (selectedPoint[vcsLayerName] == this.newPointsLayer.name) {
