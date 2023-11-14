@@ -51,7 +51,11 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     ]
   }
 
-  getValidPointCategories(selectedPoint: Feature<Geometry>) {
+  // Retrieve valid point categories for a feature (only applies for EmittingSites)
+  // Valid if the value of the attribute is more than 0
+  getValidPointCategories(
+    selectedPoint: Feature<Geometry>
+  ): Array<PointCategory> {
     const categories: Array<PointCategory> = []
     const attributeMapping: Record<PointCategory, string> = {
       [PointCategory.telephone]: 'nb_antennes_tel_mobile',
@@ -62,7 +66,6 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
       [PointCategory.other]: 'nb_antennes_autre',
     }
     for (const key in attributeMapping) {
-      console.log(key, attributeMapping[key as PointCategory])
       const fieldName = attributeMapping[key as PointCategory]
       const value = selectedPoint.getProperty(fieldName) as number
       if (value > 0) {
@@ -94,7 +97,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         `${selectedPoint.getProperty('adresse')}, ${selectedPoint.getProperty(
           'commune_nom'
         )}`,
-        'ONLINE', // TODO(IS): hard coded for now
+        '', // Not applicable for Spot Data
         selectedPoint.getProperty('mesure_date'),
         selectedPoint.getProperty('mesure_niveau') as number,
         conformity
@@ -105,12 +108,11 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
       console.log(selectedPoint.getProperties())
       pointsStore.setPointInformations(
         PointType.EmittingSites,
-        // values to modify from layer information when available
         `${selectedPoint.getProperty('adresse')}`,
-        'ONLINE', // TODO(IS): hard coded for now
+        '', // Not applicable for Emitting Sites
         selectedPoint.getProperty('support_nature'),
         selectedPoint.getProperty('support_hauteur') as number,
-        ''
+        '' // Not applicable for Emitting Sites
       )
       pointsStore.setPointCategories(
         this.getValidPointCategories(selectedPoint)

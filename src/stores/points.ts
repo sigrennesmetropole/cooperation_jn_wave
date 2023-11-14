@@ -29,7 +29,7 @@ export const usePointsStore = defineStore('point', () => {
   const newPointAbscissa: Ref<number> = ref(0)
   const newPointOrdinate: Ref<number> = ref(0)
   const pointFeature: Ref<Feature | null> = ref(null)
-  const categories: Ref<PointCategory[]> = ref([])
+  const categories: Ref<PointCategory[]> = ref([]) // Only applies for EmittingSites
 
   function setPointInformations(
     new_pointType: PointType | null,

@@ -50,6 +50,14 @@ const categories = {
   [PointCategory.fh]: [FHIcon, 'Faisceaux hertziens'],
   [PointCategory.other]: [OtherIcon, 'Autres stations'],
 }
+
+const status = computed(() => {
+  if (pointStore.pointType == PointType.RealTime) {
+    return pointStore.status
+  } else {
+    return 'ONLINE'
+  }
+})
 </script>
 
 <template>
@@ -62,10 +70,7 @@ const categories = {
         {{ prefix }}{{ pointStore.lastCom }}
       </p>
     </div>
-    <div
-      v-if="pointStore.status == 'ONLINE'"
-      class="flex flex-row justify-between"
-    >
+    <div v-if="status == 'ONLINE'" class="flex flex-row justify-between">
       <div class="flex justify-start items-center gap-5">
         <div class="flex-1 flex">
           <p
@@ -100,20 +105,19 @@ const categories = {
       class="flex flex-col items-start gap-2 self-stretch"
       v-if="pointStore.pointType == PointType.EmittingSites"
     >
-      <template v-for="(value, key) in categories" :key="key">
-        <div
-          v-if="pointStore.categories.includes(key)"
-          class="flex items-center gap-3"
-        >
-          <img :src="categories[key][0]" />
-          <p class="font-dm-sans text-base font-normal leading-6">
-            {{ categories[key][1] }}
-          </p>
-        </div>
-      </template>
+      <div
+        v-for="key in pointStore.categories"
+        :key="key"
+        class="flex items-center gap-3"
+      >
+        <img :src="categories[key][0]" />
+        <p class="font-dm-sans text-base font-normal leading-6">
+          {{ categories[key][1] }}
+        </p>
+      </div>
     </div>
     <div
-      v-if="pointStore.status == 'MAINTENANCE'"
+      v-else-if="status == 'MAINTENANCE'"
       class="flex flex-row justify-between"
     >
       <p class="font-dm-sans font-bold text-lg leading-6 text-red-500">
