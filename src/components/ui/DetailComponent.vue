@@ -58,6 +58,21 @@ const status = computed(() => {
     return 'ONLINE'
   }
 })
+
+const value = computed(() => {
+  // Custom rule to show -1 if the point is emitting site, the latest_value is 0, and
+  // the lastCom (support nature) is Intérieur sous-terrain
+  // See GSREN3D-620 for more detail
+  if (
+    pointStore.pointType == PointType.EmittingSites &&
+    pointStore.latest_value == 0 &&
+    pointStore.lastCom === 'Intérieur sous-terrain'
+  ) {
+    return -1
+  } else {
+    return pointStore.latest_value
+  }
+})
 </script>
 
 <template>
@@ -80,7 +95,7 @@ const status = computed(() => {
               'text-green-500': pointStore.pointType != PointType.EmittingSites,
             }"
           >
-            <span class="text-2xl">{{ pointStore.latest_value }}</span>
+            <span class="text-2xl">{{ value }}</span>
             {{ unit }}
           </p>
         </div>
