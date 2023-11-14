@@ -8,7 +8,7 @@ import {
   vcsLayerName,
 } from '@vcmap/core'
 import type { RennesApp } from '@/services/RennesApp'
-import { PointType, usePointsStore } from '@/stores/points'
+import { PointCategory, PointType, usePointsStore } from '@/stores/points'
 import { RENNES_LAYER } from '@/stores/layers'
 import { useViewsStore } from '@/stores/views'
 import { getSelectedPointStyle, getUnselectedPointStyle } from '../style/common'
@@ -51,6 +51,27 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     ]
   }
 
+  getValidPointCategories(selectedPoint: Feature<Geometry>) {
+    const categories: Array<PointCategory> = []
+    const attributeMapping: Record<PointCategory, string> = {
+      [PointCategory.telephone]: 'nb_antennes_tel_mobile',
+      [PointCategory.tv]: 'nb_antennes_television',
+      [PointCategory.radio]: 'nb_antennes_radio',
+      [PointCategory.pmr]: 'nb_antennes_prives',
+      [PointCategory.fh]: 'nb_antennes_fh',
+      [PointCategory.other]: 'nb_antennes_autre',
+    }
+    for (const key in attributeMapping) {
+      console.log(key, attributeMapping[key as PointCategory])
+      const fieldName = attributeMapping[key as PointCategory]
+      const value = selectedPoint.getProperty(fieldName) as number
+      if (value > 0) {
+        categories.push(key as PointCategory)
+      }
+    }
+    return categories
+  }
+
   setPointInformationsInStore(selectedPoint: Feature) {
     const pointsStore = usePointsStore()
 
@@ -91,7 +112,9 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         selectedPoint.getProperty('support_hauteur') as number,
         ''
       )
-      pointsStore.setPointCategories(['tv', 'radio'])
+      pointsStore.setPointCategories(
+        this.getValidPointCategories(selectedPoint)
+      )
     } else if (selectedPoint[vcsLayerName] == this.newPointsLayer.name) {
       pointsStore.setPointInformations(
         PointType.NewProjects,

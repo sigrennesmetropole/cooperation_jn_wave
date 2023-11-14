@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePointsStore, PointType } from '@/stores/points'
+import { usePointsStore, PointType, PointCategory } from '@/stores/points'
 import { UiButtonWithTooltip } from '@sigrennesmetropole/cooperation_jn_common_ui'
 import StandardIcon from '@/assets/icons/standard.svg'
 import UnderSurveillanceIcon from '@/assets/icons/under-surveillance.svg'
@@ -43,12 +43,12 @@ const prefix = computed(() => {
 })
 
 const categories = {
-  telephone: [TelephoneIcon, 'Téléphonie'],
-  tv: [TVIcon, 'TV'],
-  radio: [RadioIcon, 'Radio'],
-  pmr: [PMRIcon, 'Réseaux mobiles privés'],
-  fh: [FHIcon, 'Faisceaux hertziens'],
-  other: [OtherIcon, 'Autres stations'],
+  [PointCategory.telephone]: [TelephoneIcon, 'Téléphonie'],
+  [PointCategory.tv]: [TVIcon, 'TV'],
+  [PointCategory.radio]: [RadioIcon, 'Radio'],
+  [PointCategory.pmr]: [PMRIcon, 'Réseaux mobiles privés'],
+  [PointCategory.fh]: [FHIcon, 'Faisceaux hertziens'],
+  [PointCategory.other]: [OtherIcon, 'Autres stations'],
 }
 </script>
 
