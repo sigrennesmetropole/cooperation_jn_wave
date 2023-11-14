@@ -105,7 +105,6 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     } else if (
       selectedPoint[vcsLayerName] == this.emitterSitesPointsLayer.name
     ) {
-      console.log(selectedPoint.getProperties())
       pointsStore.setPointInformations(
         PointType.EmittingSites,
         `${selectedPoint.getProperty('adresse')}`,
