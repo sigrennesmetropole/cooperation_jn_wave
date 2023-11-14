@@ -91,6 +91,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         selectedPoint.getProperty('support_hauteur') as number,
         ''
       )
+      pointsStore.setPointCategories(['tv', 'radio'])
     } else if (selectedPoint[vcsLayerName] == this.newPointsLayer.name) {
       pointsStore.setPointInformations(
         PointType.NewProjects,

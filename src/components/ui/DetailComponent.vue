@@ -4,6 +4,12 @@ import { UiButtonWithTooltip } from '@sigrennesmetropole/cooperation_jn_common_u
 import StandardIcon from '@/assets/icons/standard.svg'
 import UnderSurveillanceIcon from '@/assets/icons/under-surveillance.svg'
 import NonConformingIcon from '@/assets/icons/improper.svg'
+import OtherIcon from '@/assets/icons/other.svg'
+import FHIcon from '@/assets/icons/fh.svg'
+import PMRIcon from '@/assets/icons/pmr.svg'
+import RadioIcon from '@/assets/icons/radio.svg'
+import TelephoneIcon from '@/assets/icons/telephone.svg'
+import TVIcon from '@/assets/icons/tv.svg'
 import { computed } from 'vue'
 
 const pointStore = usePointsStore()
@@ -35,6 +41,15 @@ const prefix = computed(() => {
     return 'Mesure effectuée le '
   }
 })
+
+const categories = {
+  telephone: [TelephoneIcon, 'Téléphonie'],
+  tv: [TVIcon, 'TV'],
+  radio: [RadioIcon, 'Radio'],
+  pmr: [PMRIcon, 'Réseaux mobiles privés'],
+  fh: [FHIcon, 'Faisceaux hertziens'],
+  other: [OtherIcon, 'Autres stations'],
+}
 </script>
 
 <template>
@@ -81,7 +96,22 @@ const prefix = computed(() => {
 
       <img :src="ConformityLabel ? ConformityLabel : undefined" />
     </div>
-
+    <div
+      class="flex flex-col items-start gap-2 self-stretch"
+      v-if="pointStore.pointType == PointType.EmittingSites"
+    >
+      <template v-for="(value, key) in categories" :key="key">
+        <div
+          v-if="pointStore.categories.includes(key)"
+          class="flex items-center gap-3"
+        >
+          <img :src="categories[key][0]" />
+          <p class="font-dm-sans text-base font-normal leading-6">
+            {{ categories[key][1] }}
+          </p>
+        </div>
+      </template>
+    </div>
     <div
       v-if="pointStore.status == 'MAINTENANCE'"
       class="flex flex-row justify-between"
