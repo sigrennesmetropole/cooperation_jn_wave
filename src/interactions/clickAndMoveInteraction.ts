@@ -8,7 +8,7 @@ import {
   vcsLayerName,
 } from '@vcmap/core'
 import type { RennesApp } from '@/services/RennesApp'
-import { PointType, usePointsStore } from '@/stores/points'
+import { PointCategory, PointType, usePointsStore } from '@/stores/points'
 import { RENNES_LAYER } from '@/stores/layers'
 import { useViewsStore } from '@/stores/views'
 import { getSelectedPointStyle, getUnselectedPointStyle } from '../style/common'
@@ -51,6 +51,30 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     ]
   }
 
+  // Retrieve valid point categories for a feature (only applies for EmittingSites)
+  // Valid if the value of the attribute is more than 0
+  getValidPointCategories(
+    selectedPoint: Feature<Geometry>
+  ): Array<PointCategory> {
+    const categories: Array<PointCategory> = []
+    const attributeMapping: Record<PointCategory, string> = {
+      [PointCategory.telephone]: 'nb_antennes_tel_mobile',
+      [PointCategory.tv]: 'nb_antennes_television',
+      [PointCategory.radio]: 'nb_antennes_radio',
+      [PointCategory.pmr]: 'nb_antennes_prives',
+      [PointCategory.fh]: 'nb_antennes_fh',
+      [PointCategory.other]: 'nb_antennes_autre',
+    }
+    for (const key in attributeMapping) {
+      const fieldName = attributeMapping[key as PointCategory]
+      const value = selectedPoint.getProperty(fieldName) as number
+      if (value > 0) {
+        categories.push(key as PointCategory)
+      }
+    }
+    return categories
+  }
+
   setPointInformationsInStore(selectedPoint: Feature) {
     const pointsStore = usePointsStore()
 
@@ -73,7 +97,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
         `${selectedPoint.getProperty('adresse')}, ${selectedPoint.getProperty(
           'commune_nom'
         )}`,
-        'ONLINE', // TODO(IS): hard coded for now
+        '', // Not applicable for Spot Data
         selectedPoint.getProperty('mesure_date'),
         selectedPoint.getProperty('mesure_niveau') as number,
         conformity
@@ -83,12 +107,14 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     ) {
       pointsStore.setPointInformations(
         PointType.EmittingSites,
-        // values to modify from layer information when available
-        '',
-        '',
-        '',
-        0,
-        ''
+        `${selectedPoint.getProperty('adresse')}`,
+        '', // Not applicable for Emitting Sites
+        selectedPoint.getProperty('support_nature'),
+        selectedPoint.getProperty('support_hauteur') as number,
+        '' // Not applicable for Emitting Sites
+      )
+      pointsStore.setPointCategories(
+        this.getValidPointCategories(selectedPoint)
       )
     } else if (selectedPoint[vcsLayerName] == this.newPointsLayer.name) {
       pointsStore.setPointInformations(

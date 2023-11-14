@@ -92,7 +92,10 @@
       "name": "customLayerContinuousMeasurement",
       "type": "GeoJSONLayer",
       "activeOnStartup": true,
-      "zIndex": 100
+      "zIndex": 100,
+      "vectorProperties": {
+        "eyeOffset": [0, 0, -100]
+      }
     },
     {
       "name": "customLayerSpotData",
@@ -106,17 +109,23 @@
     },
     {
       "name": "customLayerEmitterSites",
-      "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=espub_dech:v_broyage&outputFormat=application/json&srsName=EPSG:4326",
+      "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=anfr_antennes_synthese&outputFormat=application/json&srsName=EPSG:4326",
       "type": "GeoJSONLayer",
       "activeOnStartup": true,
-      "zIndex": 100
+      "zIndex": 100,
+      "vectorProperties": {
+        "eyeOffset": [0, 0, -100]
+      }
     },
     {
       "name": "customLayerNewProject",
       "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=trp_coll:trambus_parc_relais&outputFormat=application/json&srsName=EPSG:4326",
       "type": "GeoJSONLayer",
       "activeOnStartup": true,
-      "zIndex": 100
+      "zIndex": 100,
+      "vectorProperties": {
+        "eyeOffset": [0, 0, -100]
+      }
     }
   ],
   "viewpoints": [

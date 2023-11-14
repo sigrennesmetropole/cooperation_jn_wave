@@ -9,6 +9,16 @@ export enum PointType {
   EmittingSites = 'emitting-sites',
   NewProjects = 'new-projects',
 }
+
+export enum PointCategory {
+  telephone = 'telephone',
+  tv = 'tv',
+  radio = 'radio',
+  pmr = 'pmr',
+  fh = 'fh',
+  other = 'other',
+}
+
 export const usePointsStore = defineStore('point', () => {
   const pointType: Ref<PointType | null> = ref(null)
   const address: Ref<string> = ref('')
@@ -19,6 +29,7 @@ export const usePointsStore = defineStore('point', () => {
   const newPointAbscissa: Ref<number> = ref(0)
   const newPointOrdinate: Ref<number> = ref(0)
   const pointFeature: Ref<Feature | null> = ref(null)
+  const categories: Ref<PointCategory[]> = ref([]) // Only applies for EmittingSites
 
   function setPointInformations(
     new_pointType: PointType | null,
@@ -34,6 +45,13 @@ export const usePointsStore = defineStore('point', () => {
     lastCom.value = new_lastCom
     latest_value.value = new_latest_value
     conformity.value = new_conformity
+    if (new_pointType != PointType.EmittingSites) {
+      categories.value = []
+    }
+  }
+
+  function setPointCategories(new_categories: PointCategory[]) {
+    categories.value = new_categories
   }
 
   function resetPoint() {
@@ -65,10 +83,12 @@ export const usePointsStore = defineStore('point', () => {
     newPointAbscissa,
     newPointOrdinate,
     pointFeature,
+    categories,
     setPointInformations,
     resetPoint,
     setNewCoordinates,
     setNewPointFeatureOnSelectedInstallation,
     resetPointByType,
+    setPointCategories,
   }
 })
