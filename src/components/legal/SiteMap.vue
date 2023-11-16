@@ -8,6 +8,8 @@
     >
       Plan du site
     </h1>
-    <div class="text-base font-normal"></div>
+    <div class="text-base font-normal">
+      <p>Faire la même chose que pour l'appli cadastre</p>
+    </div>
   </div>
 </template>
