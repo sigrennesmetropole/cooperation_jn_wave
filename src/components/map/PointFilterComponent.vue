@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import RealTimeLogo from '@/assets/icons/real-time-logo.svg'
 import SpotMeasurementLogo from '@/assets/icons/spot-measurement-logo.svg'
 import SitesMeasurementLogo from '@/assets/icons/sites-logo.svg'
-import NewProjectsLogo from '@/assets/icons/sitesNext.svg'
 import { useCheckboxStore } from '@/stores/checkbox'
 import { PointType, usePointsStore } from '@/stores/points'
 
@@ -13,7 +12,6 @@ const pointsStore = usePointsStore()
 const selectedPointRealTime = ref<boolean>(true)
 const selectedPointSpotData = ref<boolean>(true)
 const selectedPointEmitterSites = ref<boolean>(true)
-const selectedPointNewProjects = ref<boolean>(true)
 
 function addPointsOnMap(pointType: PointType) {
   pointsStore.resetPointByType(pointType)
@@ -27,9 +25,6 @@ function addPointsOnMap(pointType: PointType) {
     case PointType.EmittingSites:
       checkboxStore.toggleEmitterSitesPoint()
       break
-    case PointType.NewProjects:
-      checkboxStore.toggleNewProjectPoint()
-      break
     default:
       break
   }
@@ -38,7 +33,7 @@ function addPointsOnMap(pointType: PointType) {
 
 <template>
   <div
-    class="absolute right-10 top-10 flex flex-col items-start select-none bg-white h-[193px] w-[273px] p-4 gap-4 rounded-lg shadow-md"
+    class="absolute right-10 top-10 flex flex-col items-start select-none bg-white w-[273px] p-4 gap-4 rounded-lg shadow-md"
   >
     <div class="flex flex-row gap-3 items-center">
       <input
@@ -84,20 +79,6 @@ function addPointsOnMap(pointType: PointType) {
       <label class="cursor-pointer flex flex-row" for="measurements">
         <img :src="SitesMeasurementLogo" class="h-5 mr-3 my-auto" />Sites
         émetteurs d'ondes
-      </label>
-    </div>
-    <div class="flex flex-row gap-3 items-center">
-      <input
-        type="checkbox"
-        id="rounded-checkbox"
-        name="measurements-new-projects"
-        class="checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:outline-none focus:ring-1 focus:ring-white cursor-pointer"
-        value="new-projects"
-        v-model="selectedPointNewProjects"
-        @click="addPointsOnMap(PointType.NewProjects)"
-      />
-      <label class="cursor-pointer flex flex-row" for="measurements">
-        <img :src="NewProjectsLogo" class="h-5 mr-3 my-auto" />Nouveaux projets
       </label>
     </div>
   </div>

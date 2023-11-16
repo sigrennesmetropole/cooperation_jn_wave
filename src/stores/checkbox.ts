@@ -6,7 +6,6 @@ export const useCheckboxStore = defineStore('checkbox', () => {
   const selectedPointRealTime = ref<boolean>(true)
   const selectedPointSpotData = ref<boolean>(true)
   const selectedPointEmitterSites = ref<boolean>(true)
-  const selectedPointNewProjects = ref<boolean>(true)
   const layerStore = useLayersStore()
 
   function toggleRealTimePoint() {
@@ -36,23 +35,12 @@ export const useCheckboxStore = defineStore('checkbox', () => {
     }
   }
 
-  function toggleNewProjectPoint() {
-    selectedPointNewProjects.value = !selectedPointNewProjects.value
-    if (selectedPointNewProjects.value == true) {
-      layerStore.enableLayer(RENNES_LAYER.customLayerNewProject)
-    } else {
-      layerStore.disableLayer(RENNES_LAYER.customLayerNewProject)
-    }
-  }
-
   return {
     selectedPointRealTime,
     selectedPointSpotData,
     selectedPointEmitterSites,
-    selectedPointNewProjects,
     toggleRealTimePoint,
     toggleSpotDataPoint,
     toggleEmitterSitesPoint,
-    toggleNewProjectPoint,
   }
 })

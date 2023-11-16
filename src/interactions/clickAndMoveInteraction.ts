@@ -15,17 +15,12 @@ import { getSelectedPointStyle, getUnselectedPointStyle } from '../style/common'
 import router from '@/router'
 import Feature from 'ol/Feature'
 import type { Geometry } from 'ol/geom'
-import {
-  addGenericListenerForUpdatePositions,
-  updatePointCoordinates,
-} from '../services/AboveMapService'
 
 class mapClickAndMoveInteraction extends AbstractInteraction {
   private _rennesApp: RennesApp
   pointsLayer: GeoJSONLayer
   spotPointsLayer: GeoJSONLayer
   emitterSitesPointsLayer: GeoJSONLayer
-  newPointsLayer: GeoJSONLayer
   layers: GeoJSONLayer[]
 
   constructor(rennesApp: RennesApp) {
@@ -40,14 +35,11 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
     this.emitterSitesPointsLayer = this._rennesApp.layers.getByKey(
       RENNES_LAYER.customLayerEmitterSites
     ) as GeoJSONLayer
-    this.newPointsLayer = this._rennesApp.layers.getByKey(
-      RENNES_LAYER.customLayerNewProject
-    ) as GeoJSONLayer
+
     this.layers = [
       this.pointsLayer,
       this.spotPointsLayer,
       this.emitterSitesPointsLayer,
-      this.newPointsLayer,
     ]
   }
 
@@ -116,16 +108,6 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
       pointsStore.setPointCategories(
         this.getValidPointCategories(selectedPoint)
       )
-    } else if (selectedPoint[vcsLayerName] == this.newPointsLayer.name) {
-      pointsStore.setPointInformations(
-        PointType.NewProjects,
-        // values to modify from layer information when available
-        'address new sites',
-        '',
-        '',
-        0,
-        ''
-      )
     }
   }
 
@@ -176,22 +158,9 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
       }
       selectedPoint.setStyle(getSelectedPointStyle)
       this.setPointInformationsInStore(selectedPoint)
-      if (selectedPoint[vcsLayerName] == 'customLayerNewProject') {
-        await this._interactionNewProject(event, selectedPoint.getGeometry()!)
-        updatePointCoordinates(this._rennesApp, 'point')
-        addGenericListenerForUpdatePositions(this._rennesApp, 'point')
-        event.stopPropagation = true
-      }
-      if (
-        viewStore.currentView === 'home' &&
-        selectedPoint[vcsLayerName] != 'customLayerNewProject'
-      ) {
+
+      if (viewStore.currentView === 'home') {
         router.push('/measurements')
-      } else if (
-        viewStore.currentView === 'measurements' &&
-        selectedPoint[vcsLayerName] == 'customLayerNewProject'
-      ) {
-        router.push('/home')
       }
       return event
     } else return event
