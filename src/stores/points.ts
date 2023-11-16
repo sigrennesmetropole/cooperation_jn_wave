@@ -7,7 +7,6 @@ export enum PointType {
   RealTime = 'real-time',
   SpotData = 'spot-data',
   EmittingSites = 'emitting-sites',
-  NewProjects = 'new-projects',
 }
 
 export enum PointCategory {

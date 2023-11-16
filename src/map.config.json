@@ -116,16 +116,6 @@
       "vectorProperties": {
         "eyeOffset": [0, 0, -100]
       }
-    },
-    {
-      "name": "customLayerNewProject",
-      "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=trp_coll:trambus_parc_relais&outputFormat=application/json&srsName=EPSG:4326",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": true,
-      "zIndex": 100,
-      "vectorProperties": {
-        "eyeOffset": [0, 0, -100]
-      }
     }
   ],
   "viewpoints": [
