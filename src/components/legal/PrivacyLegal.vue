@@ -15,9 +15,9 @@ import iconCheckGreen from '@/assets/icons/icon-check-green.svg'
         Bienvenue sur le lien
         <a
           class="underline decoration-1 font-medium"
-          href="https://solaire.coopterr.rennesmetropole.fr/"
+          href="https://ondes.coopterr.rennesmetropole.fr/"
           target="_blank"
-          >https://solaire.coopterr.rennesmetropole.fr/</a
+          >https://ondes.coopterr.rennesmetropole.fr/</a
         >
       </p>
       <p class="text-base font-normal">
@@ -44,13 +44,10 @@ import iconCheckGreen from '@/assets/icons/icon-check-green.svg'
     <div class="flex flex-col gap-8">
       <div class="text-base font-normal">
         <p class="mb-6">
-          Dans le cadre de la simulation des économies d'énergie liées au
-          pré-dimensionnement d'une installation photovoltaïque, vous nous
-          transmettez des informations personnelles : adresse et consommation
-          électrique annuelle. Les champs obligatoires sont indiqués comme tels
-          dans les formulaires. Nous nous engageons à ce que la collecte et le
-          traitement de vos données soient effectués de manière licite, loyale
-          et transparente, conformément au
+          Dans le cadre de l'accès à l'application web ondes et mesures, seule
+          votre adresse IP est collectée. Nous nous engageons à ce que la
+          collecte et le traitement de vos données soient effectués de manière
+          licite, loyale et transparente, conformément au
           <a
             class="underline decoration-1 font-medium"
             href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees"
@@ -99,99 +96,46 @@ import iconCheckGreen from '@/assets/icons/icon-check-green.svg'
         </p>
       </div>
       <h2 class="text-2xl font-bold">
-        Quelles données personnelles collectons-nous sur la plateforme ?
+        Quelles données personnelles collectons-nous ?
       </h2>
-      <div class="font-normal">
-        <h3 class="text-xl font-bold mb-2">
-          Consommation électrique annuelle, adresse et surface d'installation
-          des panneaux photovoltaïques :
-        </h3>
-        <p class="text-base">
-          Ces données sont renseignées par l'utilisateur de la Plateforme. La
-          surface d'installation des panneaux est calculée automatiquement après
-          que l'utilisateur ait retiré les obstacles présents sur la toiture.
-        </p>
-      </div>
-      <div class="font-normal">
-        <h3 class="text-xl font-bold mb-2">Adresse mail :</h3>
-        <p class="text-base">
-          Cette donnée est renseignée si l'utilisateur de la Plateforme souhaite
-          un envoi du rapport de synthèse à son adresse mail.
-        </p>
-      </div>
       <div class="font-normal">
         <h3 class="text-xl font-bold mb-2">Journaux de connexion :</h3>
         <p class="text-base">
-          Des données d´utilisation (adresses IP, logs de connexion et
-          d´utilisation) sont collectées automatiquement sur la Plateforme.
+          Des données d´utilisation (adresses IP) sont collectées
+          automatiquement.
         </p>
-      </div>
-      <div class="font-normal">
-        <h3 class="text-xl font-bold mb-2">Cookies :</h3>
-        <p class="text-base">L'application n'utilise pas de cookie.</p>
       </div>
       <h2 class="text-2xl font-bold">
         Dans quels buts ces données sont-elles collectées ?
       </h2>
     </div>
     <div class="font-normal">
-      <h3 class="text-xl font-bold mb-2">
-        Consommation électrique annuelle, adresse et surface d'installation des
-        panneaux photovoltaïques :
-      </h3>
       <p class="text-base">
-        Ces données sont utilisées par Rennes Métropole pour simuler la part de
-        production photovoltaïque associée au pré-dimensionnement d'une
-        installation photovoltaïque, consommée sur place et celle revendue et
-        injectée sur le réseau.
-      </p>
-    </div>
-    <div class="font-normal">
-      <h3 class="text-xl font-bold mb-2">Adresse mail :</h3>
-      <p class="text-base">
-        Cette donnée est renseignée si l'utilisateur de la Plateforme souhaite
-        un envoi du rapport de synthèse à son adresse mail.
+        Le but est d'assurer une traçabilité des accès et des actions des
+        différentes personnes accédant aux systèmes d’informations afin de
+        pouvoir détecter et enquêter en cas d’incident, d’intrusion dans les
+        systèmes informatiques, ou de détournement d’usage des traitements de
+        données par les personnes habilitées. Cela constitue une mesure de
+        sécurité.
       </p>
     </div>
 
-    <p class="text-2xl font-bold">Licéité du traitement des données</p>
+    <p class="text-2xl font-bold">Quelle est la licéité du traitement ?</p>
     <div class="font-normal text-base">
-      <p>
-        Les traitements de données personnelles que nous mettons en œuvre
-        reposent sur le consentement de l'utilisateur (acceptation des cookies,
-        communication des données personnelles). Le consentement peut être
-        retiré à tout moment par l'utilisateur (voir la rubrique quels sont vos
-        droits / comment les exercer).
-        <br /><br />
-        L'utilisateur a le droit de s'opposer au dépôt de ces cookies en
-        cliquant sur "refuser". Pour de plus amples informations sur les
-        cookies, vous pouvez consulter notre politique de gestion des cookies.
+      <p class="mb-6">
+        Le traitement que nous mettons en œuvre repose sur une obligation légale
+        de sécurité.
       </p>
     </div>
 
     <p class="text-2xl font-bold">
-      Pendant combien de temps vos données sont-elles conservées ?
+      Pendant combien de temps sont-elles conservées ?
     </p>
     <div class="font-normal text-base">
       <p class="mb-6">
-        Les données sont conservées uniquement pendant l'utilisation du service
-        proposé par la Plateforme.
-      </p>
-      <p class="mb-6">
-        À l'issue de cette utilisation (étape de simulation), les données
-        personnelles pourront être anonymisées et conservées à des fins
-        statistiques. Sinon, elles feront l'objet d'une suppression définitive.
-        Nous pouvons publier, divulguer et utiliser les informations agrégées
-        (informations combinées de telle sorte que personne ne puisse plus être
-        identifié ou mentionné) et les informations non personnelles à des fins
-        d'analyse de l'utilisation de la Plateforme et pour aider à la
-        planification énergétique du territoire.
-      </p>
-      <p>
-        Vous pourrez conserver la trace des informations associées à votre
-        simulation en téléchargeant le rapport de synthèse accessible via un
-        bouton 'Télécharger le rapport .pdf' disponible sur la page Tableau de
-        bord.
+        Les données sont conservées au minimum 6 mois et au maximum 1 an. À
+        l'issue de ce délai, les données personnelles feront l'objet d'une
+        suppression définitive systématique.
       </p>
     </div>
     <p class="text-2xl font-bold">
@@ -206,7 +150,7 @@ import iconCheckGreen from '@/assets/icons/icon-check-green.svg'
       </p>
       <p>
         Les demandes d'exercice de vos droits peuvent être adressées au
-        responsable de traitement par voie postale&nbsp;:
+        responsable de traitement par voie postale :
       </p>
       <p>Rennes Métropole</p>
       <p>Service Protection de la donnée</p>
@@ -240,14 +184,6 @@ import iconCheckGreen from '@/assets/icons/icon-check-green.svg'
       Nos engagements en matière de sous-traitance, communication et transferts
       de données.
     </p>
-    <div class="bg-lime-50 flex flex-row items-center justify-center gap-3 p-2">
-      <img :src="iconCheckGreen" />
-      <span class="text-sm font-normal font-dm-sans color-lime-900">
-        Vos données nominatives sont à usage interne, elles sont strictement
-        confidentielles et ne peuvent être divulguées à des tiers, sauf en cas
-        d'accord express.
-      </span>
-    </div>
     <div class="text-base font-normal">
       <p class="mb-6">
         En cas de communication de vos données personnelles à un tiers, quelle
@@ -255,11 +191,10 @@ import iconCheckGreen from '@/assets/icons/icon-check-green.svg'
         est tenu d´appliquer des conditions de confidentialité identiques aux
         nôtres.
         <br />
-        Nous nous engageons à (i) ce que tout sous-traitant, dont CampToCamp
-        propulsant la Plateforme et l'INES réalisant la simulation présentent
-        des garanties contractuelles suffisantes et appropriées pour respecter
-        vos droits, afin que le traitement réponde aux exigences du RGPD et (ii)
-        à respecter les
+        Nous nous engageons à (i) ce que tout sous-traitant, présente des
+        garanties contractuelles suffisantes et appropriées pour respecter vos
+        droits, afin que le traitement réponde aux exigences du RGPD et (ii) à
+        respecter les
         <a
           href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre5"
           target="_blank"
