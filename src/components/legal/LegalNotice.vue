@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import expandIcon from '../../assets/icons/expand-small-bigger-retract-smaller-big.svg'
+import expandIcon from '@/assets/icons/expand-small-bigger-retract-smaller-big.svg'
+import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
 </script>
 
 <template>
@@ -73,11 +74,7 @@ import expandIcon from '../../assets/icons/expand-small-bigger-retract-smaller-b
       <div class="flex flex-col gap-2 text-base font-normal">
         <h3 class="text-xl font-bold">Programme France Relance:</h3>
         <p>Ce projet a été soutenu par le programme France Relance.</p>
-        <img
-          class="h-[130px] w-[242.25px]"
-          src="../../assets/illustrations/etiquette-fr.png"
-          alt=""
-        />
+        <img class="w-[242.25px] h-[130px]" :src="imgFinancePar" alt="" />
       </div>
     </div>
   </div>

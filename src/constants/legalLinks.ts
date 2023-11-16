@@ -26,4 +26,9 @@ export const legalList: LegalItem[] = [
     slug: 'cookies',
     name: 'Cookies',
   },
+  {
+    link: '/legalnotice/cgu',
+    slug: 'cgu',
+    name: 'CGU',
+  },
 ]

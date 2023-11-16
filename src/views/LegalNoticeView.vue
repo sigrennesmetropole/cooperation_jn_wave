@@ -10,6 +10,7 @@ import Privacy from '@/components/legal/PrivacyLegal.vue'
 import SiteMap from '@/components/legal/SiteMap.vue'
 import Accessibility from '@/components/legal/AccessibilityLegal.vue'
 import Cookies from '@/components/legal/CookiesLegal.vue'
+import CGU from '@/components/legal/CGULegal.vue'
 
 const viewStore = useViewsStore()
 
@@ -33,6 +34,7 @@ onBeforeMount(async () => {
       <SiteMap v-else-if="legalLink == 'plan-du-site'"></SiteMap>
       <Accessibility v-else-if="legalLink == 'accessibilite'"></Accessibility>
       <Cookies v-else-if="legalLink == 'cookies'"></Cookies>
+      <CGU v-else-if="legalLink == 'cgu'"></CGU>
     </div>
   </div>
 </template>
