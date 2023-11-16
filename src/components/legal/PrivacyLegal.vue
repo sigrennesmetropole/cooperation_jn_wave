@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import iconCheckGreen from '@/assets/icons/icon-check-green.svg'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div
