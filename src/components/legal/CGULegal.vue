@@ -4,15 +4,13 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
 
 <template>
   <div
-    class="flex flex-col gap-12 w-[880px] h-fit bg-white rounded-xl px-8 py-16 mx-auto mt-32 mb-[87px]"
+    class="flex flex-col gap-12 w-[880px] h-fit bg-white rounded-xl px-8 py-16 mx-auto mt-32 mb-[79px] font-dm-sans"
   >
-    <h1
-      class="flex flex-column align-start text-[44px] leading-[48px] lmb-12 font-bold"
-    >
+    <h1 class="text-[44px] leading-[48px] mb-12 font-bold">
       Conditions d’utilisation
     </h1>
-    <div class="text-base font-normal">
-      <p class="text-sm font-normal">
+    <div class="flex flex-col gap-8 leading-6 text-">
+      <p class="text-base align-baseline">
         Rennes Métropole met à disposition, via le présent site, un service
         permettant, sur le territoire de Ville de Rennes, de consulter les
         mesures d'exposition aux ondes électromagnétiques réalisées,
@@ -24,11 +22,14 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
         site à des fins illicites ou immorales ou contraires à leur utilisation
         initiale.
       </p>
+      <p class="text-base align-baseline">
+        Les équipements (ordinateurs, téléphones, moyens de télécommunication…)
+        permettant l'accès au site sont à la charge exclusive des Utilisateurs,
+        de même que les frais de télécommunications induits par leur
+        utilisation.
+      </p>
 
-      Les équipements (ordinateurs, téléphones, moyens de télécommunication…)
-      permettant l'accès au site sont à la charge exclusive des Utilisateurs, de
-      même que les frais de télécommunications induits par leur utilisation.
-      <p class="text-sm font-normal">
+      <p class="text-base align-baseline">
         Pour une expérience optimale de l'application, vous trouverez ci-dessous
         les prérequis techniques :
       </p>
@@ -70,7 +71,7 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
         votre navigateur si nécessaire.
       </p>
 
-      <h4 class="text-xl font-bold">Services proposés aux utilisateurs</h4>
+      <h2 class="text-2xl font-bold">Services proposés aux utilisateurs</h2>
       <ul class="list-disc pl-6">
         <li>
           Consultation des mesures en temps réel : via l'observatoire des Ondes,
@@ -92,8 +93,8 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
           stations) : également disponibles via le site Cartoradio.
         </li>
       </ul>
-      <h4 class="text-xl font-bold mt-1">Propriété intellectuelle</h4>
-      <h5 class="font-bold text-lg">Sites utilisés</h5>
+      <h2 class="text-2xl font-bold mt-1">Propriété intellectuelle</h2>
+      <h3 class="font-bold text-xl">Sites utilisés</h3>
       <ul class="list-disc pl-6">
         <li>
           <a
@@ -113,9 +114,9 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
           des sites émetteurs d'ondes au sein de la Ville de Rennes
         </li>
       </ul>
-      <h4 class="text-xl font-bold mt-1">Droits de reproduction</h4>
-      <h5 class="font-bold text-lg">Contenus produits par Rennes Métropole</h5>
-      <p>
+      <h2 class="text-2xl font-bold mt-1">Droits de reproduction</h2>
+      <h3 class="font-bold text-xl">Contenus produits par Rennes Métropole</h3>
+      <p class="text-base align-baseline">
         Le présent site est la propriété de Rennes Métropole, qui en est
         l'auteur au sens des articles L. 111.1 et suivants du Code de la
         propriété intellectuelle. Les photographies, textes, slogans, dessins,
@@ -136,8 +137,8 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
         contrefaçon.
       </p>
 
-      <h5 class="font-bold text-lg">Liens hypertextes pointant vers le site</h5>
-      <p>
+      <h3 class="font-bold text-xl">Liens hypertextes pointant vers le site</h3>
+      <p class="text-base align-baseline">
         Le site de Rennes Métropole autorise tout site internet ou tout autre
         support à le citer ou à mettre en place un lien hypertexte pointant vers
         son contenu, sous réserve :
@@ -159,7 +160,7 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
           gratuit.
         </li>
       </ul>
-      <p>
+      <p class="text-base align-baseline">
         Cette autorisation ne s’applique pas aux sites diffusant des
         informations à caractère polémique, pornographique, xénophobe ou
         pouvant, dans une plus large mesure porter atteinte à la sensibilité du
@@ -173,20 +174,20 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
         destinataires.
       </p>
 
-      <h5 class="font-bold text-lg">
+      <h3 class="font-bold text-xl">
         Liens hypertextes proposés sur le présent site
-      </h5>
-      <p>
+      </h3>
+      <p class="text-base align-baseline">
         Plusieurs liens vers d’autres sites sont proposés. Leur présence ne
         saurait engager Rennes Métropole quant à leur contenu et ne vise qu’à
         permettre à l’internaute de trouver plus facilement un accompagnement et
         d’autres ressources sur le sujet de l'énergie photovoltaïque.
       </p>
 
-      <h4 class="text-xl font-bold mt-1">
+      <h2 class="text-2xl font-bold mt-1">
         Traitement des données personnelles
-      </h4>
-      <p>
+      </h2>
+      <p class="text-base align-baseline">
         Voir la politique
         <a
           href="/legalnotice/confidentialite"
@@ -198,8 +199,8 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
         du présent site.
       </p>
 
-      <h4 class="text-xl font-bold mt-1">Responsabilité</h4>
-      <p>
+      <h2 class="text-2xl font-bold mt-1">Responsabilité</h2>
+      <p class="text-base align-baseline">
         Rennes Métropole met tout en œuvre pour offrir aux Utilisateurs des
         informations et/ou des outils disponibles et mis à jour. Pour autant,
         elle ne saurait être tenue responsable en cas d’erreurs, d’absence de
@@ -216,12 +217,16 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
         force majeure.
       </p>
 
-      <h4 class="text-xl font-bold mt-1">Programme France Relance</h4>
-      <p>Ce projet a été soutenu par le programme France Relance.</p>
+      <h2 class="text-2xl font-bold mt-1">Programme France Relance</h2>
+      <p class="text-base align-baseline">
+        Ce projet a été soutenu par le programme France Relance.
+      </p>
 
       <img class="w-[242.25px] h-[130px]" :src="imgFinancePar" alt="" />
 
-      <p>Licence Creative Commons BY-NC-SA 3.0 FR</p>
+      <p class="text-base align-baseline">
+        Licence Creative Commons BY-NC-SA 3.0 FR
+      </p>
     </div>
   </div>
 </template>

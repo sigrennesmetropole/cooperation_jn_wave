@@ -4,7 +4,7 @@
   <div
     class="flex flex-col gap-12 w-[880px] h-fit bg-white rounded-xl px-8 py-16 mx-auto mt-32 mb-[79px]"
   >
-    <h1 class="text-[44px] leading-[48px] lmb-12 font-bold">
+    <h1 class="text-[44px] leading-[48px] mb-12 font-bold">
       Politique de protection des données personnelles
     </h1>
     <p>Dernière mise à jour : 13 juin 2023</p>
