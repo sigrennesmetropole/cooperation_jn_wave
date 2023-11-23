@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import router from '@/router'
+
 import RealTimeLogo from '@/assets/icons/real-time-logo.svg'
 import SpotMeasurementLogo from '@/assets/icons/spot-measurement-logo.svg'
 import SitesMeasurementLogo from '@/assets/icons/sites-logo.svg'
@@ -27,6 +29,9 @@ function addPointsOnMap(pointType: PointType) {
       break
     default:
       break
+  }
+  if (!pointsStore.pointType) {
+    router.push('/home')
   }
 }
 </script>
