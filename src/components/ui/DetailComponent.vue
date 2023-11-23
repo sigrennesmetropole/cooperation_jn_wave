@@ -73,13 +73,67 @@ const value = computed(() => {
     return pointStore.latest_value
   }
 })
+
+function convertToTitleCase(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/(^|\s)\S/g, (match) => match.toUpperCase())
+}
+
+function convertToFrenchAddressCase(text: string): string {
+  // List of words to keep in lowercase (prepositions and conjunctions)
+  const lowercaseWords: string[] = [
+    'de',
+    'du',
+    'des',
+    'le',
+    'la',
+    'les',
+    'et',
+    'ou',
+    'en',
+    'sur',
+    'dans',
+    'avec',
+  ]
+
+  // Split the text into words
+  let words: string[] = text.split(/\s+/)
+
+  // Convert selected words to lowercase
+  words = words.map((word) =>
+    lowercaseWords.includes(word.toLowerCase())
+      ? word.toLowerCase()
+      : convertToTitleCase(word)
+  )
+
+  // Join the words back into a string
+  const result: string = words.join(' ')
+  return result
+}
+
+const formattedAddress = computed(() => {
+  if (pointStore.pointType == PointType.EmittingSites) {
+    return convertToFrenchAddressCase(pointStore.address)
+  } else {
+    return pointStore.address
+  }
+})
+
+const informationTooltipText = computed(() => {
+  if (pointStore.pointType == PointType.EmittingSites) {
+    return 'La hauteur indiquée en mètre correspond à la distance par rapport au sol de l’installation (-1 en sous-sol).'
+  } else {
+    return 'La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’alerte maximal.'
+  }
+})
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
     <div class="relative">
       <p class="font-dm-sans font-medium text-base text-neutral-600">
-        {{ pointStore.address }}
+        {{ formattedAddress }}
       </p>
       <p class="font-dm-sans font-normal text-sm text-neutral-400">
         {{ prefix }}{{ pointStore.lastCom }}
@@ -106,7 +160,7 @@ const value = computed(() => {
             widthButton="4"
             heightButton="4"
             zIndex="z-10"
-            text="La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’alerte maximal."
+            :text="informationTooltipText"
             widthBoxText="w-[300px]"
             positionRight="4"
             positionTop="0px"
