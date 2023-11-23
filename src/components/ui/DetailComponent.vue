@@ -73,13 +73,59 @@ const value = computed(() => {
     return pointStore.latest_value
   }
 })
+
+function convertToTitleCase(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/(^|\s)\S/g, (match) => match.toUpperCase())
+}
+
+function convertToFrenchAddressCase(text: string): string {
+  // List of words to keep in lowercase (prepositions and conjunctions)
+  const lowercaseWords: string[] = [
+    'DE',
+    'DU',
+    'DES',
+    'LE',
+    'LA',
+    'LES',
+    'ET',
+    'OU',
+    'EN',
+    'SUR',
+    'DANS',
+    'AVEC',
+  ]
+
+  // Split the text into words
+  let words: string[] = text.split(/\s+/)
+
+  // Convert selected words to lowercase
+  words = words.map((word) =>
+    lowercaseWords.includes(word.toUpperCase())
+      ? word.toLowerCase()
+      : convertToTitleCase(word)
+  )
+
+  // Join the words back into a string
+  const result: string = words.join(' ')
+  return result
+}
+
+const formattedAddress = computed(() => {
+  if (pointStore.pointType == PointType.EmittingSites) {
+    return convertToFrenchAddressCase(pointStore.address)
+  } else {
+    return pointStore.address
+  }
+})
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
     <div class="relative">
       <p class="font-dm-sans font-medium text-base text-neutral-600">
-        {{ pointStore.address }}
+        {{ formattedAddress }}
       </p>
       <p class="font-dm-sans font-normal text-sm text-neutral-400">
         {{ prefix }}{{ pointStore.lastCom }}
