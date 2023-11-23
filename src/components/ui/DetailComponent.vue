@@ -119,6 +119,14 @@ const formattedAddress = computed(() => {
     return pointStore.address
   }
 })
+
+const informationTooltipText = computed(() => {
+  if (pointStore.pointType == PointType.EmittingSites) {
+    return 'La hauteur indiquée en mètre correspond à la distance par rapport au sol de l’installation (-1 en sous-sol).'
+  } else {
+    return 'La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’alerte maximal.'
+  }
+})
 </script>
 
 <template>
@@ -152,7 +160,7 @@ const formattedAddress = computed(() => {
             widthButton="4"
             heightButton="4"
             zIndex="z-10"
-            text="La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’alerte maximal."
+            :text="informationTooltipText"
             widthBoxText="w-[300px]"
             positionRight="4"
             positionTop="0px"
