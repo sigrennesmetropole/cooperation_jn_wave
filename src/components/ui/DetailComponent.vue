@@ -83,18 +83,18 @@ function convertToTitleCase(input: string): string {
 function convertToFrenchAddressCase(text: string): string {
   // List of words to keep in lowercase (prepositions and conjunctions)
   const lowercaseWords: string[] = [
-    'DE',
-    'DU',
-    'DES',
-    'LE',
-    'LA',
-    'LES',
-    'ET',
-    'OU',
-    'EN',
-    'SUR',
-    'DANS',
-    'AVEC',
+    'de',
+    'du',
+    'des',
+    'le',
+    'la',
+    'les',
+    'et',
+    'ou',
+    'en',
+    'sur',
+    'dans',
+    'avec',
   ]
 
   // Split the text into words
@@ -102,7 +102,7 @@ function convertToFrenchAddressCase(text: string): string {
 
   // Convert selected words to lowercase
   words = words.map((word) =>
-    lowercaseWords.includes(word.toUpperCase())
+    lowercaseWords.includes(word.toLowerCase())
       ? word.toLowerCase()
       : convertToTitleCase(word)
   )
