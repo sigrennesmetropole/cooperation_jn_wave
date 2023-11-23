@@ -84,7 +84,7 @@
     },
     {
       "name": "customLayerSearchAddress",
-      "type": "GeoJSONLayer",
+      "type": "DataSourceLayer",
       "activeOnStartup": true,
       "zIndex": 100
     },
