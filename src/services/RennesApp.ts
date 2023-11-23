@@ -11,6 +11,7 @@ import type Map from 'ol/Map.js'
 import { useMapStore } from '@/stores/map'
 import type { RennesLayer } from '@/stores/layers'
 import type { Style } from 'ol/style'
+import { Cartographic } from '@vcmap-cesium/engine'
 
 export class RennesApp extends VcsApp {
   readonly mapConfig
@@ -68,5 +69,17 @@ export class RennesApp extends VcsApp {
         f.setStyle(layerStyle)
       })
     }
+  }
+
+  async getHeight(x: number, y: number) {
+    const cartographic = Cartographic.fromDegrees(x, y)
+    const result = await this.get3DMap()
+      .getScene()!
+      .sampleHeightMostDetailed([cartographic])
+    if (result.length === 0) {
+      return 0
+    }
+    const height = result[0].height
+    return height
   }
 }
