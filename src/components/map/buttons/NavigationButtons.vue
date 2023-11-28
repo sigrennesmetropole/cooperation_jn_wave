@@ -55,7 +55,7 @@ const heightClass = computed(() => {
 })
 
 function getMeasure() {
-  console.log('Measure')
+  rennesApp.toggleMeasurementTool()
 }
 </script>
 
@@ -74,6 +74,7 @@ function getMeasure() {
       widthTitle="200"
       positionX="-210"
       positionY="12"
+      v-if="!mapStore.is3D()"
     >
       <img :src="IconMeasure" />
     </UiIconButton>
