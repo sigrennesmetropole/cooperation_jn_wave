@@ -44,7 +44,7 @@ export class MeasurementTool {
   /**
    * The help tooltip element.
    */
-  helpTooltipElement: HTMLElement
+  helpTooltipElement: HTMLElement | null
 
   /**
    * Overlay to show the help messages.
@@ -91,12 +91,14 @@ export class MeasurementTool {
     this.map.addLayer(this.vector)
 
     this.sketch = new Feature()
-    this.helpTooltipElement = document.createElement('div')
+    this.helpTooltipElement = null
     this.helpTooltip = new Overlay({})
     this.measureTooltipElement = document.createElement('div')
     this.measureTooltip = new Overlay({})
 
-    this.map.on('pointermove', this.pointerMoveHandler)
+    this.map.on('pointermove', (evt: MapBrowserEvent<UIEvent>) => {
+      this.pointerMoveHandler(evt)
+    })
   }
 
   pointerMoveHandler(evt: MapBrowserEvent<UIEvent>) {
@@ -113,7 +115,6 @@ export class MeasurementTool {
         helpMsg = this.continueLineMsg
       }
     }
-
     if (this.helpTooltipElement) {
       //   console.log('this.helpTooltipElement')
       this.helpTooltipElement.innerHTML = helpMsg
@@ -155,6 +156,7 @@ export class MeasurementTool {
       positioning: 'center-left',
     })
     this.map.addOverlay(this.helpTooltip)
+    console.log(`this.helpTooltip: ${this.helpTooltip}`)
   }
 
   /**
@@ -187,20 +189,16 @@ export class MeasurementTool {
 
     let listener: EventsKey | EventsKey[] | undefined
     this.draw.on('drawstart', (evt: DrawEvent) => {
-      console.log('drawstart')
       // set sketch
       this.sketch = evt.feature
 
       let tooltipCoord = evt.feature.getGeometry()?.getCoordinates()
       listener = this.sketch?.getGeometry()?.on('change', (evt) => {
         const geom = evt.target
-        // let output
-        // if (geom instanceof LineString) {
         const output = this.formatLength(geom)
         tooltipCoord = geom.getLastCoordinate()
-        // }
         if (!this.measureTooltipElement) {
-          this.measureTooltipElement = new HTMLElement()
+          this.measureTooltipElement = document.createElement('div')
         }
         this.measureTooltipElement.innerHTML = output
         this.measureTooltip.setPosition(tooltipCoord)
@@ -208,9 +206,10 @@ export class MeasurementTool {
     })
 
     this.draw.on('drawend', () => {
-      console.log('drawend')
+      console.log(`drawend: ${this}`)
+      console.log(this)
       if (!this.measureTooltipElement) {
-        this.measureTooltipElement = new HTMLElement()
+        this.measureTooltipElement = document.createElement('div')
       }
       this.measureTooltipElement.className =
         'relative bg-[#FDF08A] rounded text-black px-1 py-2 whitespace-nowrap text-xs cursor-default select-none text-red-700 border-2 border-white'
@@ -229,5 +228,12 @@ export class MeasurementTool {
 
   removeInteraction() {
     this.map.removeInteraction(this.draw)
+    // this.helpTooltipElement?.remove()
+    // this.measureTooltipElement?.remove()
+    this.map.removeOverlay(this.measureTooltip)
+    this.map.removeOverlay(this.helpTooltip)
+    this.sketch = new Feature()
+    const f = this.sketch
+    console.log(f)
   }
 }
