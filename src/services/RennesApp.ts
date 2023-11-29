@@ -12,22 +12,19 @@ import { useMapStore } from '@/stores/map'
 import type { RennesLayer } from '@/stores/layers'
 import type { Style } from 'ol/style'
 import { Cartographic } from '@vcmap-cesium/engine'
-import Draw from 'ol/interaction/Draw'
-import VectorSource from 'ol/source/Vector'
+import { MeasurementTool } from '@/interactions/measurementTool'
 
 export class RennesApp extends VcsApp {
   readonly mapConfig
-  measurement
-  measurementToolEnabled
+  measurementTool: MeasurementTool | null
+  measurementToolEnabled: boolean
 
   constructor(mapConfig: object) {
     super()
     this.mapConfig = mapConfig
-    this.measurement = new Draw({
-      source: new VectorSource(),
-      type: 'LineString',
-    })
+
     this.measurementToolEnabled = false
+    this.measurementTool = null
   }
 
   async initializeMap() {
@@ -41,13 +38,15 @@ export class RennesApp extends VcsApp {
       cesiumMap.getScene().globe.maximumScreenSpaceError = 1
       mapStore.isInitializeMap = true
     }
+    // TODO: make it as an option when initializing a map
+    this.measurementTool = new MeasurementTool(this.getOpenlayerMap())
   }
 
   setMeasurementToolEnabled(enabled: boolean) {
     if (enabled) {
-      this.getOpenlayerMap().addInteraction(this.measurement)
+      this.measurementTool?.addInteraction()
     } else {
-      this.getOpenlayerMap().removeInteraction(this.measurement)
+      this.measurementTool?.removeInteraction()
     }
     this.measurementToolEnabled = enabled
   }
