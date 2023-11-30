@@ -5,6 +5,7 @@ import { defineStore } from 'pinia'
 export const useHomeStore = defineStore('home', () => {
   const isTermOfUseAccepted: Ref<boolean> = ref(false)
   const displayError: Ref<boolean> = ref(false)
+  const isMeasurementToolActive: Ref<boolean> = ref(false)
 
   function setIsTermOfUseAccepted(newValue: boolean) {
     isTermOfUseAccepted.value = newValue
@@ -17,6 +18,7 @@ export const useHomeStore = defineStore('home', () => {
   return {
     isTermOfUseAccepted,
     displayError,
+    isMeasurementToolActive,
     setIsTermOfUseAccepted,
     setDisplayError,
   }
