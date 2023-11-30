@@ -13,7 +13,7 @@ import { getLength } from 'ol/sphere.js'
 import { Fill, Stroke, Style } from 'ol/style'
 import CircleStyle from 'ol/style/Circle'
 
-const style = new Style({
+const measurementStyle = new Style({
   fill: new Fill({
     color: 'rgba(255, 255, 255, 0.2)',
   }),
@@ -34,40 +34,35 @@ const style = new Style({
 })
 
 export class MeasurementTool {
+  // The map where the measurement tool added
   map: Map
+
+  // The layer where the measurement line added
+  vector: VectorLayer<VectorSource>
+
+  // Destination where the drawn features are added
   source: VectorSource
-  /**
-   * Currently drawn feature.
-   */
+
+  // Interaction for drawing the measurement line
+  draw: Draw
+
+  // Currently drawn feature.
   sketch: Feature
 
-  /**
-   * The help tooltip element.
-   */
+  // The help tooltip element.
   helpTooltipElement: HTMLElement | null
 
-  /**
-   * Overlay to show the help messages.
-   */
+  //  Overlay to show the help messages.
   helpTooltip: Overlay
 
-  /**
-   * The measure tooltip element.
-   */
+  // The measure tooltip element.
   measureTooltipElement: HTMLElement | null
 
-  /**
-   * Overlay to show the measurement.
-   */
+  // Overlay to show the measurement.
   measureTooltip: Overlay
 
-  /**
-   * Message to show when the user is drawing a line.
-   */
-  continueLineMsg = 'Click to continue drawing the line'
-
-  draw: Draw
-  vector: VectorLayer<VectorSource>
+  // Reference to all measurement tooltip that has been created
+  measureToolptipList: Array<Overlay>
 
   constructor(map: Map) {
     this.map = map
@@ -75,7 +70,7 @@ export class MeasurementTool {
     this.draw = new Draw({
       source: this.source,
       type: 'LineString',
-      style: style,
+      style: measurementStyle,
     })
     this.vector = new VectorLayer({
       source: this.source,
@@ -95,23 +90,25 @@ export class MeasurementTool {
     this.helpTooltip = new Overlay({})
     this.measureTooltipElement = document.createElement('div')
     this.measureTooltip = new Overlay({})
+    this.measureToolptipList = []
+    this.measureToolptipList.push(this.measureTooltip)
 
     this.map.on('pointermove', (evt: MapBrowserEvent<UIEvent>) => {
       this.pointerMoveHandler(evt)
     })
   }
 
+  // Handling the event when the mouse if moving on the map
   pointerMoveHandler(evt: MapBrowserEvent<UIEvent>) {
     if (evt.dragging) {
       return
     }
-    // console.log(`here: ${evt.coordinate}`)
     let helpMsg = 'Click to start drawing'
 
     if (this.sketch) {
       const geom = this.sketch.getGeometry()
       if (geom instanceof LineString) {
-        helpMsg = this.continueLineMsg
+        helpMsg = 'Click to continue drawing the line'
       }
     }
     if (this.helpTooltipElement) {
@@ -122,9 +119,7 @@ export class MeasurementTool {
     }
   }
 
-  /**
-   * Format length output.
-   */
+  // Format length output.
   formatLength(line: LineString): string {
     const length = getLength(line)
     let output
@@ -136,11 +131,8 @@ export class MeasurementTool {
     return output
   }
 
-  /**
-   * Creates a new help tooltip
-   */
+  // Creates a new help tooltip
   createHelpTooltip() {
-    console.log('create helptooltip')
     if (this.helpTooltipElement) {
       this.helpTooltipElement.parentNode?.removeChild(this.helpTooltipElement)
     }
@@ -154,12 +146,9 @@ export class MeasurementTool {
       positioning: 'center-left',
     })
     this.map.addOverlay(this.helpTooltip)
-    console.log(`this.helpTooltip: ${this.helpTooltip}`)
   }
 
-  /**
-   * Creates a new measure tooltip
-   */
+  // Creates a new measure tooltip
   createMeasureTooltip() {
     if (this.measureTooltipElement) {
       this.measureTooltipElement.parentNode?.removeChild(
@@ -177,6 +166,7 @@ export class MeasurementTool {
       insertFirst: false,
     })
     this.map.addOverlay(this.measureTooltip)
+    this.measureToolptipList.push(this.measureTooltip)
   }
 
   addInteraction() {
@@ -204,8 +194,6 @@ export class MeasurementTool {
     })
 
     this.draw.on('drawend', () => {
-      console.log(`drawend: ${this}`)
-      console.log(this)
       if (!this.measureTooltipElement) {
         this.measureTooltipElement = document.createElement('div')
       }
@@ -226,8 +214,14 @@ export class MeasurementTool {
 
   removeInteraction() {
     this.map.removeInteraction(this.draw)
+
     this.map.removeOverlay(this.measureTooltip)
     this.map.removeOverlay(this.helpTooltip)
+    this.measureToolptipList.forEach((measureTooltip) => {
+      this.map.removeOverlay(measureTooltip)
+    })
+    this.measureToolptipList = []
+
     this.vector.getSource()?.clear()
   }
 }
