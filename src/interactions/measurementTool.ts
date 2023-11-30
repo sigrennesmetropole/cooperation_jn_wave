@@ -1,3 +1,4 @@
+// Heavily inspired from https://openlayers.org/en/latest/examples/measure.html
 import Feature from 'ol/Feature'
 import type Map from 'ol/Map'
 import type MapBrowserEvent from 'ol/MapBrowserEvent'
