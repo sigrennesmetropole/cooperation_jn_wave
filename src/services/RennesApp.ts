@@ -38,17 +38,24 @@ export class RennesApp extends VcsApp {
       cesiumMap.getScene().globe.maximumScreenSpaceError = 1
       mapStore.isInitializeMap = true
     }
-    // TODO: make it as an option when initializing a map
+  }
+
+  activateMeasurementTool() {
     this.measurementTool = new MeasurementTool(this.getOpenlayerMap())
   }
 
   setMeasurementToolEnabled(enabled: boolean) {
-    if (enabled) {
-      this.measurementTool?.addInteraction()
+    if (!this.measurementTool) {
+      console.log('Measurement tool is not active')
+      return
     } else {
-      this.measurementTool?.removeInteraction()
+      if (enabled) {
+        this.measurementTool.addInteraction()
+      } else {
+        this.measurementTool.removeInteraction()
+      }
+      this.measurementToolEnabled = enabled
     }
-    this.measurementToolEnabled = enabled
   }
 
   toggleMeasurementTool() {

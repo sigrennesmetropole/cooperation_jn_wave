@@ -24,6 +24,7 @@ const mapViewPointStore = useMapViewPointStore()
 
 onMounted(async () => {
   await rennesApp.initializeMap()
+  rennesApp.activateMeasurementTool()
   await updateActiveMap()
   await updateLayersVisibility()
   // force initialization of the interaction on init page
