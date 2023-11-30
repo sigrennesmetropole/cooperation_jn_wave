@@ -103,12 +103,12 @@ export class MeasurementTool {
     if (evt.dragging) {
       return
     }
-    let helpMsg = 'Click to start drawing'
+    let helpMsg = 'Cliquez pour commencer à mesurer'
 
     if (this.sketch) {
       const geom = this.sketch.getGeometry()
       if (geom instanceof LineString) {
-        helpMsg = 'Click to continue drawing the line'
+        helpMsg = 'Cliquez pour continuer à mesurer'
       }
     }
     if (this.helpTooltipElement) {
@@ -138,7 +138,7 @@ export class MeasurementTool {
     }
     this.helpTooltipElement = document.createElement('div')
     this.helpTooltipElement.className =
-      'relative bg-black/50 rounded text-white px-1 py-2 opacity-70 whitespace-nowrap text-xs cursor-default select-none hidden'
+      'relative bg-black/50 rounded text-white px-1 py-2 opacity-70 whitespace-nowrap text-xs cursor-default select-none hidden font-dm-sans'
 
     this.helpTooltip = new Overlay({
       element: this.helpTooltipElement,
@@ -157,7 +157,7 @@ export class MeasurementTool {
     }
     this.measureTooltipElement = document.createElement('div')
     this.measureTooltipElement.className =
-      'relative bg-black/50 rounded text-white px-1 py-2 opacity-100 font-bold whitespace-nowrap text-xs cursor-default select-none '
+      'relative bg-black/50 rounded text-white px-1 py-2 opacity-100 font-bold whitespace-nowrap text-xs cursor-default select-none font-dm-sans'
     this.measureTooltip = new Overlay({
       element: this.measureTooltipElement,
       offset: [0, -15],
@@ -198,7 +198,7 @@ export class MeasurementTool {
         this.measureTooltipElement = document.createElement('div')
       }
       this.measureTooltipElement.className =
-        'relative bg-[#fdf08a] rounded text-black px-1 py-2 whitespace-nowrap text-xs cursor-default select-none text-red-700 border-2 border-white'
+        'relative bg-[#fdf08a] rounded text-black px-1 py-2 whitespace-nowrap text-xs cursor-default select-none text-red-700 border-2 border-white font-dm-sans'
 
       this.measureTooltip.setOffset([0, -7])
       // unset sketch
