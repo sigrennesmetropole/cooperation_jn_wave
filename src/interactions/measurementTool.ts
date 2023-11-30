@@ -81,10 +81,10 @@ export class MeasurementTool {
       source: this.source,
       style: {
         'fill-color': 'rgba(255, 255, 255, 0.2)',
-        'stroke-color': '#FDF08A',
+        'stroke-color': '#fdf08a',
         'stroke-width': 4,
         'circle-radius': 7,
-        'circle-fill-color': '#FDF08A',
+        'circle-fill-color': '#fdf08a',
       },
     })
 
@@ -109,14 +109,12 @@ export class MeasurementTool {
     let helpMsg = 'Click to start drawing'
 
     if (this.sketch) {
-      //   console.log('this.sketch')
       const geom = this.sketch.getGeometry()
       if (geom instanceof LineString) {
         helpMsg = this.continueLineMsg
       }
     }
     if (this.helpTooltipElement) {
-      //   console.log('this.helpTooltipElement')
       this.helpTooltipElement.innerHTML = helpMsg
       this.helpTooltip.setPosition(evt.coordinate)
 
@@ -212,7 +210,7 @@ export class MeasurementTool {
         this.measureTooltipElement = document.createElement('div')
       }
       this.measureTooltipElement.className =
-        'relative bg-[#FDF08A] rounded text-black px-1 py-2 whitespace-nowrap text-xs cursor-default select-none text-red-700 border-2 border-white'
+        'relative bg-[#fdf08a] rounded text-black px-1 py-2 whitespace-nowrap text-xs cursor-default select-none text-red-700 border-2 border-white'
 
       this.measureTooltip.setOffset([0, -7])
       // unset sketch
@@ -228,12 +226,8 @@ export class MeasurementTool {
 
   removeInteraction() {
     this.map.removeInteraction(this.draw)
-    // this.helpTooltipElement?.remove()
-    // this.measureTooltipElement?.remove()
     this.map.removeOverlay(this.measureTooltip)
     this.map.removeOverlay(this.helpTooltip)
-    this.sketch = new Feature()
-    const f = this.sketch
-    console.log(f)
+    this.vector.getSource()?.clear()
   }
 }
