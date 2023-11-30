@@ -10,7 +10,7 @@ import { UiIconButton } from '@sigrennesmetropole/cooperation_jn_common_ui'
 import { UiDescribeButtonCompass } from '@sigrennesmetropole/cooperation_jn_common_ui'
 
 import CompassComponent from '@/components/map/CompassComponent.vue'
-import IconMeasure from '@/assets/icons/measure-tool.png'
+import IconMeasure from '@/assets/icons/measure-tool.svg'
 import UiDescribe3DMode from '@/components/map/UiDescribe3DMode.vue'
 
 import type { RennesApp } from '@/services/RennesApp'
@@ -76,7 +76,7 @@ function getMeasure() {
       positionY="12"
       v-if="!mapStore.is3D()"
     >
-      <img :src="IconMeasure" />
+      <img height="20" width="20" :src="IconMeasure" />
     </UiIconButton>
     <div class="flex flex-col zoom-buttons text-2xl [&>*]:p-2" role="group">
       <UiIconButton
