@@ -58,7 +58,7 @@ onMounted(() => {
         techniques comme des mâts, des pylônes ou des bras de déport.
       </p>
       <p class="font-dm-sans text-sm font-medium">
-        Six services sont distinguées ici : la téléphonie mobile, les réseaux
+        Six services sont distingués ici : la téléphonie mobile, les réseaux
         mobiles privés, la télévision, la radio, les faisceaux hertziens et les
         autres stations.
       </p>
