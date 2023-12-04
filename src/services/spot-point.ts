@@ -1,4 +1,4 @@
-import spotIcon from '../assets/icons/spot.png'
+import spotIcon from '@/assets/icons/spot.svg'
 import { Icon, Style } from 'ol/style'
 import type { RennesApp } from './RennesApp'
 import type { GeoJSONLayer } from '@vcmap/core'

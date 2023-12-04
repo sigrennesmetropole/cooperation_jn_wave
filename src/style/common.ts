@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import { Icon, Style } from 'ol/style'
-import continuousIcon from '@/assets/icons/continuous.png'
-import spotIcon from '@/assets/icons/spot.png'
+import continuousIcon from '@/assets/icons/continuous.svg'
+import spotIcon from '@/assets/icons/spot.svg'
 import emitterIcon from '@/assets/icons/emitter.svg'
 import { vcsLayerName } from '@vcmap/core'
 import { RENNES_LAYER } from '@/stores/layers'
