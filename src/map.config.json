@@ -92,7 +92,7 @@
       "name": "customLayerContinuousMeasurement",
       "type": "GeoJSONLayer",
       "activeOnStartup": true,
-      "zIndex": 100,
+      "zIndex": 101,
       "vectorProperties": {
         "eyeOffset": [0, 0, -100]
       }
