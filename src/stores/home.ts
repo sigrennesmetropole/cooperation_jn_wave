@@ -15,11 +15,16 @@ export const useHomeStore = defineStore('home', () => {
     displayError.value = newValue
   }
 
+  function toggleMeasurementTool() {
+    isMeasurementToolActive.value = !isMeasurementToolActive.value
+  }
+
   return {
     isTermOfUseAccepted,
     displayError,
     isMeasurementToolActive,
     setIsTermOfUseAccepted,
     setDisplayError,
+    toggleMeasurementTool,
   }
 })

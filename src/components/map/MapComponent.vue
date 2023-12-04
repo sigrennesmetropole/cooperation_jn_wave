@@ -15,11 +15,13 @@ import { useViewsStore } from '@/stores/views'
 import { EventType } from '@vcmap/core'
 import mapClickAndMoveInteraction from '@/interactions/clickAndMoveInteraction'
 import { getUnselectedPointStyle } from '@/style/common'
+import { useHomeStore } from '@/stores/home'
 
 const rennesApp = inject('rennesApp') as RennesApp
 const layerStore = useLayersStore()
 const mapStore = useMapStore()
 const viewStore = useViewsStore()
+const homeStore = useHomeStore()
 const mapViewPointStore = useMapViewPointStore()
 
 onMounted(async () => {
@@ -85,6 +87,10 @@ async function updateViewPoint(viewPoint: string) {
 
 layerStore.$subscribe(async () => {
   await updateLayersVisibility()
+})
+
+homeStore.$subscribe(async () => {
+  rennesApp.setMeasurementToolEnabled(homeStore.isMeasurementToolActive)
 })
 
 mapStore.$subscribe(async () => {

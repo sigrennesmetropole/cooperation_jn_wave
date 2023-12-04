@@ -58,8 +58,7 @@ const heightClass = computed(() => {
 })
 
 function toggleMeasurementTool() {
-  rennesApp.toggleMeasurementTool()
-  homeStore.isMeasurementToolActive = rennesApp.measurementToolEnabled
+  homeStore.toggleMeasurementTool()
 }
 
 const measurementToolIcon = computed(() => {
