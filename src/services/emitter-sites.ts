@@ -1,7 +1,7 @@
-import emitterIcon from '../assets/icons/emitter.png'
+import emitterIcon from '@/src/assets/icons/emitter.svg'
 import type { GeoJSONLayer } from '@vcmap/core'
 import { Icon, Style } from 'ol/style'
-import type { RennesApp } from './RennesApp'
+import type { RennesApp } from '@/services/RennesApp'
 
 export function emitterSitesPointStyle() {
   return new Style({
