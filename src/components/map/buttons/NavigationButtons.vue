@@ -26,6 +26,9 @@ const homeStore = useHomeStore()
 
 async function toggle3DMap() {
   mapStore.toggle3D()
+  if (mapStore.is3D()) {
+    homeStore.isMeasurementToolActive = false
+  }
 }
 
 async function zoom(out = false, zoomFactor = 2): Promise<void> {
