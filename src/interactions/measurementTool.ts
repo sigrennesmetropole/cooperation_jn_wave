@@ -75,13 +75,16 @@ export class MeasurementTool {
     })
     this.vector = new VectorLayer({
       source: this.source,
-      style: {
-        'fill-color': 'rgba(255, 255, 255, 0.2)',
-        'stroke-color': '#fdf08a',
-        'stroke-width': 4,
-        'circle-radius': 7,
-        'circle-fill-color': '#fdf08a',
-      },
+      style: [
+        {
+          'stroke-color': '#0000007F',
+          'stroke-width': 6,
+        },
+        {
+          'stroke-color': '#fdf08a',
+          'stroke-width': 4,
+        },
+      ],
     })
 
     this.map.addLayer(this.vector)
@@ -200,7 +203,7 @@ export class MeasurementTool {
         this.measureTooltipElement = document.createElement('div')
       }
       this.measureTooltipElement.className =
-        'relative bg-[#fdf08a] rounded text-black px-1 py-2 whitespace-nowrap text-xs cursor-default select-none text-red-700 border-2 border-white font-dm-sans'
+        'relative bg-[#fdf08a] rounded text-black px-1 py-2 whitespace-nowrap text-xs cursor-default select-none text-red-700 border-2 border-black/[0.50] font-dm-sans'
 
       this.measureTooltip.setOffset([0, -7])
       // unset sketch
