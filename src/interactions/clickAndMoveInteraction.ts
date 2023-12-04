@@ -15,6 +15,7 @@ import { getSelectedPointStyle, getUnselectedPointStyle } from '../style/common'
 import router from '@/router'
 import Feature from 'ol/Feature'
 import type { Geometry } from 'ol/geom'
+import { useHomeStore } from '@/stores/home'
 
 class mapClickAndMoveInteraction extends AbstractInteraction {
   private _rennesApp: RennesApp
@@ -126,6 +127,7 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
   async pipe(event: InteractionEvent): Promise<InteractionEvent> {
     const pointsStore = usePointsStore()
     const viewStore = useViewsStore()
+    const homeStore = useHomeStore()
     const selectedPoint = event.feature as Feature<Geometry>
 
     if (event.type & EventType.MOVE) {
@@ -152,9 +154,14 @@ class mapClickAndMoveInteraction extends AbstractInteraction {
           .map((l) => l.name)
           .includes(selectedPoint[vcsLayerName] as string)
       ) {
-        pointsStore.resetPoint()
-        await router.push('/home')
-        return event
+        // If the measurement tool is active, do not go to home view (keep in the current view)
+        if (homeStore.isMeasurementToolActive) {
+          return event
+        } else {
+          pointsStore.resetPoint()
+          await router.push('/home')
+          return event
+        }
       }
       selectedPoint.setStyle(getSelectedPointStyle)
       this.setPointInformationsInStore(selectedPoint)
