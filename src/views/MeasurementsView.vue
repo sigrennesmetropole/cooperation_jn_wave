@@ -10,11 +10,15 @@ import { PointType, usePointsStore } from '@/stores/points'
 import { onMounted } from 'vue'
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
+import router from '@/router'
 
 const viewStore = useViewsStore()
 const pointStore = usePointsStore()
 
 onMounted(() => {
+  if (!pointStore.pointType) {
+    router.push('/home')
+  }
   viewStore.setCurrentView(viewList['measurements'])
 })
 </script>
