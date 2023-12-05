@@ -12,12 +12,19 @@ import { useMapStore } from '@/stores/map'
 import type { RennesLayer } from '@/stores/layers'
 import type { Style } from 'ol/style'
 import { Cartographic } from '@vcmap-cesium/engine'
+import { MeasurementTool } from '@/interactions/measurementTool'
 
 export class RennesApp extends VcsApp {
   readonly mapConfig
+  measurementTool: MeasurementTool | null
+  measurementToolEnabled: boolean
+
   constructor(mapConfig: object) {
     super()
     this.mapConfig = mapConfig
+
+    this.measurementToolEnabled = false
+    this.measurementTool = null
   }
 
   async initializeMap() {
@@ -31,6 +38,28 @@ export class RennesApp extends VcsApp {
       cesiumMap.getScene().globe.maximumScreenSpaceError = 1
       mapStore.isInitializeMap = true
     }
+  }
+
+  activateMeasurementTool() {
+    this.measurementTool = new MeasurementTool(this.getOpenlayerMap())
+  }
+
+  setMeasurementToolEnabled(enabled: boolean) {
+    if (!this.measurementTool) {
+      console.log('Measurement tool is not active')
+      return
+    } else {
+      if (enabled) {
+        this.measurementTool.addInteraction()
+      } else {
+        this.measurementTool.removeInteraction()
+      }
+      this.measurementToolEnabled = enabled
+    }
+  }
+
+  toggleMeasurementTool() {
+    this.setMeasurementToolEnabled(!this.measurementToolEnabled)
   }
 
   getHomeViewpoint() {

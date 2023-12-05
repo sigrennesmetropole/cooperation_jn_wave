@@ -10,19 +10,25 @@ import { UiIconButton } from '@sigrennesmetropole/cooperation_jn_common_ui'
 import { UiDescribeButtonCompass } from '@sigrennesmetropole/cooperation_jn_common_ui'
 
 import CompassComponent from '@/components/map/CompassComponent.vue'
-import IconMeasure from '@/assets/icons/measure-tool.png'
+import IconMeasure from '@/assets/icons/measure-tool.svg'
+import IconMeasureYellow from '@/assets/icons/measure-tool-yellow.svg'
 import UiDescribe3DMode from '@/components/map/UiDescribe3DMode.vue'
 
 import type { RennesApp } from '@/services/RennesApp'
 import { usePanelsStore, PANEL_WIDTH } from '@/stores/panels'
 import { useMapStore } from '@/stores/map'
+import { useHomeStore } from '@/stores/home'
 
 const rennesApp = inject('rennesApp') as RennesApp
 const panelStore = usePanelsStore()
 const mapStore = useMapStore()
+const homeStore = useHomeStore()
 
 async function toggle3DMap() {
   mapStore.toggle3D()
+  if (mapStore.is3D()) {
+    homeStore.isMeasurementToolActive = false
+  }
 }
 
 async function zoom(out = false, zoomFactor = 2): Promise<void> {
@@ -54,9 +60,17 @@ const heightClass = computed(() => {
   return ['h-90']
 })
 
-function getMeasure() {
-  console.log('Measure')
+function toggleMeasurementTool() {
+  homeStore.toggleMeasurementTool()
 }
+
+const measurementToolIcon = computed(() => {
+  if (homeStore.isMeasurementToolActive) {
+    return IconMeasureYellow
+  } else {
+    return IconMeasure
+  }
+})
 </script>
 
 <template>
@@ -67,15 +81,16 @@ function getMeasure() {
   >
     <UiIconButton
       class="rounded-lg"
-      @click="getMeasure"
+      @click="toggleMeasurementTool"
       ariaLabelButton="Outil de mesure"
       titleButton="Outil de mesure"
       heightTitle="30"
       widthTitle="200"
       positionX="-210"
       positionY="12"
+      v-if="!mapStore.is3D()"
     >
-      <img :src="IconMeasure" />
+      <img height="20" width="20" :src="measurementToolIcon" />
     </UiIconButton>
     <div class="flex flex-col zoom-buttons text-2xl [&>*]:p-2" role="group">
       <UiIconButton
