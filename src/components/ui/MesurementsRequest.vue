@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import ExpandArrow from '@/assets/icons/icon-external-link-white-thin.svg'
 import { UiButton } from '@sigrennesmetropole/cooperation_jn_common_ui'
-// import { getStringFromConfig } from '@/services/configService'
 
 // A Ajouter dans le back
-// const anfr_link = getStringFromConfig('link.anfr_link')
-const anfr_link = 'https://mesures.anfr.fr/#/'
+const anfr_link = 'https://metropole.rennes.fr/les-ondes-electromagnetiques'
 
 function goToANFRPage() {
   window.open(anfr_link, '_blank')

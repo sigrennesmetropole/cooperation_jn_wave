@@ -3,7 +3,7 @@ import { point } from '@turf/turf'
 import type { BBox, Feature, Point, Properties } from '@turf/turf'
 
 // Same as the initial distance in map.config.json
-const cameraDistance = 400
+const cameraDistance = 1600
 
 export function computeViewPoint(
   turfPoint: Feature<Point, Properties>,

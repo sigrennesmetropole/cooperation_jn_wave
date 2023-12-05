@@ -10,11 +10,15 @@ import { PointType, usePointsStore } from '@/stores/points'
 import { onMounted } from 'vue'
 import { useViewsStore } from '@/stores/views'
 import { viewList } from '@/model/views.model'
+import router from '@/router'
 
 const viewStore = useViewsStore()
 const pointStore = usePointsStore()
 
 onMounted(() => {
+  if (!pointStore.pointType) {
+    router.push('/home')
+  }
   viewStore.setCurrentView(viewList['measurements'])
 })
 </script>
@@ -58,7 +62,7 @@ onMounted(() => {
         techniques comme des mâts, des pylônes ou des bras de déport.
       </p>
       <p class="font-dm-sans text-sm font-medium">
-        Six services sont distinguées ici : la téléphonie mobile, les réseaux
+        Six services sont distingués ici : la téléphonie mobile, les réseaux
         mobiles privés, la télévision, la radio, les faisceaux hertziens et les
         autres stations.
       </p>
