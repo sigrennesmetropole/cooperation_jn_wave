@@ -90,10 +90,10 @@ import imgFinancePar from '@/assets/illustrations/etiquette-fr.png'
         <li>
           Consultation des sites émetteurs d'ondes (téléphonie mobile, réseaux
           mobiles privés, télévision, radio, faisceaux hertziens et autres
-          stations) : également disponibles via le site Cartoradio. Ces données
-          sont mises à jour une fois par trimestre.
+          stations) : également disponibles via le site Cartoradio.
         </li>
       </ul>
+      <p>Ces données sont mises à jour une fois par trimestre.</p>
       <h2 class="text-2xl font-bold mt-1">Propriété intellectuelle</h2>
       <h3 class="font-bold text-xl">Sites utilisés</h3>
       <ul class="list-disc pl-6">

@@ -113,7 +113,7 @@ export class MeasurementTool {
       const geom = this.sketch.getGeometry()
       if (geom instanceof LineString) {
         helpMsg =
-          'Cliquez pour continuer à mesurer. Double-cliquez pour terminer la mesure.'
+          'Cliquez pour continuer à mesurer.<br>Double-cliquez pour terminer la mesure.'
       }
     }
     if (this.helpTooltipElement) {
