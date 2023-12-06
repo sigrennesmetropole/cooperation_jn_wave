@@ -114,7 +114,7 @@
       "activeOnStartup": true,
       "zIndex": 101,
       "vectorProperties": {
-        "eyeOffset": [0, 0, -100]
+        "eyeOffset": [0, 0, -110]
       }
     }
   ],

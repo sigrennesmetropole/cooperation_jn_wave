@@ -124,7 +124,7 @@ const informationTooltipText = computed(() => {
   if (pointStore.pointType == PointType.EmittingSites) {
     return 'La hauteur indiquée en mètre correspond à la distance par rapport au sol de l’installation (-1 en sous-sol).'
   } else {
-    return 'La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’alerte maximal.'
+    return 'La mesure enregistrée respecte la limite réglementaire d’exposition la plus restrictive et le seuil d’attention nationale.'
   }
 })
 </script>
