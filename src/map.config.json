@@ -89,15 +89,6 @@
       "zIndex": 100
     },
     {
-      "name": "customLayerContinuousMeasurement",
-      "type": "GeoJSONLayer",
-      "activeOnStartup": true,
-      "zIndex": 101,
-      "vectorProperties": {
-        "eyeOffset": [0, 0, -100]
-      }
-    },
-    {
       "name": "customLayerSpotData",
       "url": "https://public.sig.rennesmetropole.fr/geoserver/ows?service=WFS&request=getFeature&typename=res_num:anfr_mesures_ondes&outputFormat=application/json&srsName=EPSG:4326",
       "type": "GeoJSONLayer",
@@ -113,6 +104,15 @@
       "type": "GeoJSONLayer",
       "activeOnStartup": true,
       "zIndex": 100,
+      "vectorProperties": {
+        "eyeOffset": [0, 0, -100]
+      }
+    },
+    {
+      "name": "customLayerContinuousMeasurement",
+      "type": "GeoJSONLayer",
+      "activeOnStartup": true,
+      "zIndex": 101,
       "vectorProperties": {
         "eyeOffset": [0, 0, -100]
       }
