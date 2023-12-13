@@ -168,6 +168,7 @@ const goToAddress = async (event: {
 
   const newVp = await createVPForTypeAddress(rennesApp, event.type, event.item)
   if (newVp) {
+    newVp.distance = 200
     resetAutocompletion()
     mapStore.viewPoint = newVp
 
