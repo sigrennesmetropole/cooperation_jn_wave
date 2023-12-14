@@ -10,27 +10,17 @@
     </h1>
     <a
       class="text-xl font-bold mb-2"
-      href="https://home.coopterr.rennesmetropole.fr"
+      href="https://coopterr.rennesmetropole.fr"
     >
       COOPTERR
     </a>
-    <a
-      class="text-xl font-bold mb-2"
-      href="https://solaire.coopterr.rennesmetropole.fr"
-    >
-      Cadastre Solaire
-    </a>
+    <a class="text-xl font-bold mb-2"> Cadastre Solaire </a>
     <a
       class="text-xl font-bold mb-2"
       href="https://ondes.coopterr.rennesmetropole.fr"
     >
       Ondes & Mesures
     </a>
-    <a
-      class="text-xl font-bold mb-2"
-      href="https://trambus.coopterr.rennesmetropole.fr"
-    >
-      Réseau Trambus
-    </a>
+    <a class="text-xl font-bold mb-2"> Réseau Trambus </a>
   </div>
 </template>
