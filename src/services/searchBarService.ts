@@ -22,6 +22,7 @@ import { NearFarScalar } from '@vcmap-cesium/engine'
 import { DistanceDisplayCondition } from '@vcmap-cesium/engine'
 import { Color } from '@vcmap-cesium/engine'
 
+const defaultFallbackHeight = 50
 function extractCoordinatesFromItem(item: AddressCommune | AddressStreet) {
   let coordinates = item.upperCorner.split(' ')
   const lonUpperCorner = coordinates[0]
@@ -100,10 +101,10 @@ export async function addPin(
   customLayer.entities.removeAll()
 
   // TODO: Some times failed to get the terrain height, due to 3d tile failed to load
-  const terrainHeight = await rennesApp.getHeight(
-    coordinates[0],
-    coordinates[1]
-  )
+  const terrainHeight =
+    (await rennesApp.getHeight(coordinates[0], coordinates[1])) ??
+    defaultFallbackHeight
+
   const entity = new CesiumEntity({
     position: Cartesian3.fromDegrees(
       coordinates[0],
