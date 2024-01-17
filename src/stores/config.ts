@@ -10,6 +10,17 @@ type ConfigType = {
     nb_addresses_communes: number
     nb_addresses_streets: number
   }
+  link: {
+    coopterr_link: string
+    solar_link: string
+    trambus_link: string
+    ondes_link: string
+    contact_link: string
+  }
+  wave: {
+    carte_ondes_url: string
+    carto_radio_url: string
+  }
 }
 
 export const useConfigStore = defineStore('configStore', () => {
