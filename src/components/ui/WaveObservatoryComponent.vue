@@ -2,12 +2,12 @@
 import expandArrow from '@/assets/icons/expand-small-bigger-retract-smaller-big.svg'
 import WaveObservatory from '@/assets/illustrations/wave-observatory.svg'
 import { UiButton } from '@sigrennesmetropole/cooperation_jn_common_ui'
+import { useConfigStore } from '@/stores/config'
+
+let configStore = useConfigStore()
 
 function goToWaveObservatory() {
-  window.open(
-    'https://www.observatoiredesondes.com/fr/carte-des-ondes/',
-    '_blank'
-  )
+  window.open(configStore.config?.wave.carte_ondes_url, '_blank')
 }
 </script>
 

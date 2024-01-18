@@ -19,7 +19,7 @@ const mapStore = useMapStore()
 onBeforeMount(async () => {
   const rennesApp = new RennesApp(mapConfig)
   provide('rennesApp', rennesApp)
-  displayRealTimePoints(rennesApp)
+  await displayRealTimePoints(rennesApp)
 })
 
 function isLeftPanelRetractable() {
