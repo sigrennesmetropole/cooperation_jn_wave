@@ -8,20 +8,20 @@ let configStore = useConfigStore()
   <UiCGULegal>
     <li>
       <a
-        :href="configStore.config?.wave.carte_ondes_url"
+        :href="configStore.config?.wave.links.carte_ondes_url"
         target="_blank"
         class="underline"
-        >{{ configStore.config?.wave.carte_ondes_url }}</a
+        >{{ configStore.config?.wave.links.carte_ondes_url }}</a
       >
       : ce site permet la consultation des mesures en temps réel d'exposition
       aux ondes électromagnétiques
     </li>
     <li>
       <a
-        :href="configStore.config?.wave.carto_radio_url"
+        :href="configStore.config?.wave.links.carto_radio_url"
         target="_blank"
         class="underline"
-        >{{ configStore.config?.wave.carto_radio_url }}</a
+        >{{ configStore.config?.wave.links.carto_radio_url }}</a
       >
       : ce site permet la consultation à la fois des mesures ponctuelles et des
       sites émetteurs d'ondes au sein de la Ville de Rennes
