@@ -7,7 +7,7 @@ import { useConfigStore } from '@/stores/config'
 let configStore = useConfigStore()
 
 function goToWaveObservatory() {
-  window.open(configStore.config?.wave.carte_ondes_url, '_blank')
+  window.open(configStore.config?.wave.links.carte_ondes_url, '_blank')
 }
 </script>
 

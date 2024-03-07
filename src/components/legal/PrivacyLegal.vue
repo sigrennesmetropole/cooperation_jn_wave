@@ -7,8 +7,8 @@ let configStore = useConfigStore()
 
 <template>
   <UiPrivacyLegal
-    :current_url="configStore.config?.link.ondes_link"
-    :contact_link="configStore.config?.link.contact_link"
+    :current_url="configStore.config?.common.links.ondes_link!"
+    :contact_link="configStore.config?.common.links.contact_link!"
   >
   </UiPrivacyLegal>
 </template>
